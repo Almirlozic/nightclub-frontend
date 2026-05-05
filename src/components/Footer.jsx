@@ -33,9 +33,9 @@ const Footer = () => {
       >
         <div className="absolute inset-0 bg-black/85" />
 
-        <div className="relative z-10 grid grid-cols-3 gap-12 px-16 py-24">
+        <div className="relative z-10 grid grid-cols-1 min-[909px]:grid-cols-3 gap-4 min-[909px]:gap-6 lg:gap-12 px-6 min-[909px]:px-8 lg:px-16 py-12 lg:py-24">
           {/* Column 1: Brand + Location + Hours */}
-          <div className="flex flex-col justify-between h-full">
+          <div className="flex flex-col items-center min-[909px]:items-start gap-8 min-[909px]:gap-0 min-[909px]:justify-between h-full text-center min-[909px]:text-left">
             <div>
               <p className="text-white text-3xl font-bold">
                 NIGHT
@@ -74,65 +74,40 @@ const Footer = () => {
           </div>
 
           {/* Column 2: News */}
-          <div className="flex flex-col justify-between h-full">
+          <div className="hidden min-[909px]:flex flex-col justify-between h-full">
             <h3 className="text-(--color-brand) font-bold tracking-widest mb-6">
               NEWS
             </h3>
             <div className="flex flex-col gap-10 flex-1">
-              <div className="flex gap-4">
-                <Image
-                  src="/assets/content-img/recent_post1.jpg"
-                  alt="News post 1"
-                  width={130}
-                  height={100}
-                  className="flex-shrink-0"
-                  style={{
-                    width: 130,
-                    height: 100,
-                    objectFit: "cover",
-                  }}
-                />
-                <div>
-                  <p className="text-white text-sm leading-relaxed">
-                    Lorem Ipsum is simply dummy
-                    text of the printing and
-                    typesetting.
-                  </p>
-                  <p className="text-(--color-brand) text-sm mt-2">
-                    April 17, 2026
-                  </p>
+              {[
+                { src: "/assets/content-img/recent_post1.jpg", alt: "News post 1" },
+                { src: "/assets/content-img/recent_post2.jpg", alt: "News post 2" },
+              ].map(({ src, alt }) => (
+                <div key={alt} className="flex gap-4 items-start">
+                  <div className="relative shrink-0 w-16 h-14 min-[909px]:w-20 min-[909px]:h-16 lg:w-32 lg:h-24">
+                    <Image
+                      src={src}
+                      alt={alt}
+                      fill
+                      sizes="(max-width: 768px) 64px, (max-width: 1024px) 80px, 128px"
+                      style={{ objectFit: "cover" }}
+                    />
+                  </div>
+                  <div className="min-w-0">
+                    <p className="text-white text-sm leading-relaxed">
+                      Lorem Ipsum is simply dummy text of the printing and typesetting.
+                    </p>
+                    <p className="text-(--color-brand) text-sm mt-2">
+                      April 17, 2026
+                    </p>
+                  </div>
                 </div>
-              </div>
-
-              <div className="flex gap-4">
-                <Image
-                  src="/assets/content-img/recent_post2.jpg"
-                  alt="News post 2"
-                  width={130}
-                  height={100}
-                  className="flex-shrink-0"
-                  style={{
-                    width: 130,
-                    height: 100,
-                    objectFit: "cover",
-                  }}
-                />
-                <div>
-                  <p className="text-white text-sm leading-relaxed">
-                    Lorem Ipsum is simply dummy
-                    text of the printing and
-                    typesetting.
-                  </p>
-                  <p className="text-(--color-brand) text-sm mt-2">
-                    April 17, 2026
-                  </p>
-                </div>
-              </div>
+              ))}
             </div>
           </div>
 
           {/* Column 3: Recent Posts */}
-          <div className="flex flex-col justify-between h-full">
+          <div className="hidden min-[909px]:flex flex-col justify-between h-full">
             <h3 className="text-(--color-brand) font-bold tracking-widest mb-6">
               RECENT POSTS
             </h3>
@@ -164,9 +139,9 @@ const Footer = () => {
       </div>
 
       {/* Bottom bar */}
-      <div className="bg-black py-5 flex items-center justify-between px-16">
-        <p className="text-gray-500 text-sm">
-          Night Club - All Rights Reserved
+      <div className="bg-black py-6 flex flex-col min-[909px]:flex-row items-center gap-6 min-[909px]:gap-0 justify-center min-[909px]:justify-between px-8 lg:px-16">
+        <p className="text-gray-500 text-sm text-center min-[909px]:text-left">
+          Night Club<br />All Rights Reserved
         </p>
         <div className="flex flex-col items-center gap-3">
           <p className="text-white text-sm font-semibold">Stay Connected With Us</p>
