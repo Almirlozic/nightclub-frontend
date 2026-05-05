@@ -33,7 +33,7 @@ const Footer = () => {
       >
         <div className="absolute inset-0 bg-black/85" />
 
-        <div className="relative z-10 grid grid-cols-3 gap-12 px-16 py-14">
+        <div className="relative z-10 grid grid-cols-3 gap-12 px-16 py-24">
           {/* Column 1: Brand + Location + Hours */}
           <div className="flex flex-col justify-between h-full">
             <div>
@@ -78,7 +78,7 @@ const Footer = () => {
             <h3 className="text-(--color-brand) font-bold tracking-widest mb-6">
               NEWS
             </h3>
-            <div className="flex flex-col justify-between flex-1">
+            <div className="flex flex-col gap-10 flex-1">
               <div className="flex gap-4">
                 <Image
                   src="/assets/content-img/recent_post1.jpg"
