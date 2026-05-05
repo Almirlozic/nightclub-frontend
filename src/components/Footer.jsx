@@ -80,22 +80,36 @@ const Footer = () => {
             </h3>
             <div className="flex flex-col gap-10 flex-1">
               {[
-                { src: "/assets/content-img/recent_post1.jpg", alt: "News post 1" },
-                { src: "/assets/content-img/recent_post2.jpg", alt: "News post 2" },
+                {
+                  src: "/assets/content-img/recent_post1.jpg",
+                  alt: "News post 1",
+                },
+                {
+                  src: "/assets/content-img/recent_post2.jpg",
+                  alt: "News post 2",
+                },
               ].map(({ src, alt }) => (
-                <div key={alt} className="flex gap-4 items-start">
+                <div
+                  key={alt}
+                  className="flex gap-4 items-start"
+                >
                   <div className="relative shrink-0 w-16 h-14 min-[909px]:w-28 min-[909px]:h-20">
                     <Image
                       src={src}
                       alt={alt}
                       fill
                       sizes="(max-width: 909px) 64px, 112px"
-                      style={{ objectFit: "cover" }}
+                      style={{
+                        objectFit: "cover",
+                      }}
                     />
                   </div>
+
                   <div className="min-w-0">
                     <p className="text-white text-sm leading-relaxed">
-                      Lorem Ipsum is simply dummy text of the printing and typesetting.
+                      Lorem Ipsum is simply dummy
+                      text of the printing and
+                      typesetting.
                     </p>
                     <p className="text-(--color-brand) text-sm mt-2">
                       April 17, 2026
@@ -141,10 +155,14 @@ const Footer = () => {
       {/* Bottom bar */}
       <div className="bg-black py-6 flex flex-col min-[909px]:flex-row items-center gap-6 min-[909px]:gap-0 justify-center min-[909px]:justify-between px-8 lg:px-16">
         <p className="text-gray-500 text-sm text-center min-[909px]:text-left">
-          Night Club<br />All Rights Reserved
+          Night Club
+          <br />
+          All Rights Reserved
         </p>
         <div className="flex flex-col items-center gap-3">
-          <p className="text-white text-sm font-semibold">Stay Connected With Us</p>
+          <p className="text-white text-sm font-semibold">
+            Stay Connected With Us
+          </p>
           <SocialIcons />
         </div>
         <p className="text-gray-500 text-sm">
