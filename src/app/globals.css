@@ -1,8 +1,9 @@
 @import "tailwindcss";
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --color-brand: oklch(62% 0.27 350);
+  --color-bg: oklch(0% 0 0);
+  --color-text: oklch(100% 0 0);
 }
 
 @theme inline {
@@ -20,7 +21,32 @@
 }
 
 body {
-  background: var(--background);
+  background: var(--color-bg);
   color: var(--foreground);
   font-family: Arial, Helvetica, sans-serif;
+}
+
+header.header-corners {
+  position: relative;
+}
+
+header.header-corners::before,
+header.header-corners::after {
+  content: "";
+  position: absolute;
+  width: 24px;
+  height: 24px;
+  background: var(--color-brand);
+}
+
+header.header-corners::before {
+  top: 0;
+  left: 0;
+  clip-path: polygon(0 0, 100% 0, 0 100%);
+}
+
+header.header-corners::after {
+  bottom: 0;
+  right: 0;
+  clip-path: polygon(100% 100%, 0 100%, 100% 0);
 }
