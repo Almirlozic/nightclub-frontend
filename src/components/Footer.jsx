@@ -84,12 +84,12 @@ const Footer = () => {
                 { src: "/assets/content-img/recent_post2.jpg", alt: "News post 2" },
               ].map(({ src, alt }) => (
                 <div key={alt} className="flex gap-4 items-start">
-                  <div className="relative shrink-0 w-16 h-14 min-[909px]:w-20 min-[909px]:h-16 lg:w-32 lg:h-24">
+                  <div className="relative shrink-0 w-16 h-14 min-[909px]:w-28 min-[909px]:h-20">
                     <Image
                       src={src}
                       alt={alt}
                       fill
-                      sizes="(max-width: 768px) 64px, (max-width: 1024px) 80px, 128px"
+                      sizes="(max-width: 909px) 64px, 112px"
                       style={{ objectFit: "cover" }}
                     />
                   </div>
