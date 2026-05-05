@@ -1,4 +1,5 @@
 import Image from "next/image";
+import SocialIcons from "./SocialIcons";
 
 const XIcon = () => (
   <svg
@@ -167,9 +168,10 @@ const Footer = () => {
         <p className="text-gray-500 text-sm">
           Night Club - All Rights Reserved
         </p>
-        <p className="text-white-500 text-sm">
-          Stay connected with us
-        </p>
+        <div className="flex flex-col items-center gap-3">
+          <p className="text-white text-sm font-semibold">Stay Connected With Us</p>
+          <SocialIcons />
+        </div>
         <p className="text-gray-500 text-sm">
           Copyright © NightClub
         </p>
