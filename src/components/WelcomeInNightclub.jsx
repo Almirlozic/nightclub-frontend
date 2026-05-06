@@ -34,7 +34,7 @@ const Card = ({ src, icon: Icon, label, description }) => {
 
   return (
     <div
-      className="relative w-75 h-95 overflow-hidden cursor-pointer"
+      className="relative w-full max-w-75 h-95 overflow-hidden cursor-pointer"
       onMouseEnter={() => setHovered(true)}
       onMouseLeave={() => setHovered(false)}
     >
@@ -102,7 +102,7 @@ const Card = ({ src, icon: Icon, label, description }) => {
 
 const WelcomeInNightclub = () => {
   return (
-    <div className="flex justify-center gap-8 mt-12 mb-1">
+    <div className="flex flex-col md:flex-row justify-center items-center gap-8 mt-12 mb-1 px-4">
       {cards.map((card) => (
         <Card key={card.label} {...card} />
       ))}
