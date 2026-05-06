@@ -1,4 +1,6 @@
 import Image from "next/image";
+import { IoRestaurant } from "react-icons/io5";
+import { FaChampagneGlasses } from "react-icons/fa6";
 
 const cards = [
   {
@@ -10,14 +12,14 @@ const cards = [
   },
   {
     src: "/assets/content-img/reastaurant_1.jpg",
-    icon: "/assets/icon/table2.svg",
+    icon: IoRestaurant,
     label: "RESTAURANT",
     description:
       "There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some form.",
   },
   {
     src: "/assets/content-img/thumb2.jpg",
-    icon: "/assets/icon/table3.svg",
+    icon: FaChampagneGlasses,
     label: "BAR",
     description:
       "There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some form.",
@@ -26,9 +28,9 @@ const cards = [
 
 const WelcomeInNightclub = () => {
   return (
-    <div className="flex justify-center gap-8 my-12">
+    <div className="flex justify-center gap-8 mt-12 mb-1">
       {cards.map(
-        ({ src, icon, label, description }) => (
+        ({ src, icon: Icon, label, description }) => (
           <div
             key={label}
             className="relative w-75 h-95 overflow-hidden group cursor-pointer"
@@ -63,11 +65,11 @@ const WelcomeInNightclub = () => {
 
               {/* Icon */}
               <div className="border border-(--color-brand) p-4">
-                <img
-                  src={icon}
-                  alt={label}
-                  className="w-10 h-10"
-                />
+                {typeof Icon === "string" ? (
+                  <img src={Icon} alt={label} className="w-10 h-10" />
+                ) : (
+                  <Icon size={40} className="text-(--color-brand)" />
+                )}
               </div>
 
               <h3 className="text-white font-bold tracking-widest text-lg">
