@@ -55,26 +55,26 @@ const Card = ({ src, icon: Icon, label, description }) => {
       >
         {/* Corner accents */}
         <div
-          key={hovered ? "tl-on" : "tl-off"}
-          className={`absolute top-0 left-0 w-6 h-6 bg-(--color-brand) ${
-            hovered ? "animate-corner-tl" : ""
-          }`}
-          style={{ clipPath: "polygon(0 0, 100% 0, 0 100%)" }}
+          className="absolute top-0 left-0 w-6 h-6 bg-(--color-brand)"
+          style={{
+            clipPath: "polygon(0 0, 100% 0, 0 100%)",
+            transformOrigin: "top left",
+            animation: hovered ? "corner-pop 0.3s ease both" : "none",
+          }}
         />
         <div
-          key={hovered ? "br-on" : "br-off"}
-          className={`absolute bottom-0 right-0 w-6 h-6 bg-(--color-brand) ${
-            hovered ? "animate-corner-br" : ""
-          }`}
-          style={{ clipPath: "polygon(100% 100%, 0 100%, 100% 0)" }}
+          className="absolute bottom-0 right-0 w-6 h-6 bg-(--color-brand)"
+          style={{
+            clipPath: "polygon(100% 100%, 0 100%, 100% 0)",
+            transformOrigin: "bottom right",
+            animation: hovered ? "corner-pop 0.3s ease 0.05s both" : "none",
+          }}
         />
 
         {/* Icon */}
         <div
-          key={hovered ? "icon-on" : "icon-off"}
-          className={`border border-(--color-brand) p-4 ${
-            hovered ? "animate-slide-left" : ""
-          }`}
+          className="border border-(--color-brand) p-4"
+          style={{ animation: hovered ? "slide-from-left 0.4s ease 0.15s both" : "none" }}
         >
           {typeof Icon === "string" ? (
             <img src={Icon} alt={label} className="w-10 h-10" />
@@ -84,18 +84,14 @@ const Card = ({ src, icon: Icon, label, description }) => {
         </div>
 
         <h3
-          key={hovered ? "h3-on" : "h3-off"}
-          className={`text-white font-bold tracking-widest text-lg ${
-            hovered ? "animate-slide-right" : ""
-          }`}
+          className="text-white font-bold tracking-widest text-lg"
+          style={{ animation: hovered ? "slide-from-right 0.4s ease 0.2s both" : "none" }}
         >
           {label}
         </h3>
         <p
-          key={hovered ? "p-on" : "p-off"}
-          className={`text-white text-sm leading-relaxed ${
-            hovered ? "animate-slide-right" : ""
-          }`}
+          className="text-white text-sm leading-relaxed"
+          style={{ animation: hovered ? "slide-from-right 0.4s ease 0.25s both" : "none" }}
         >
           {description}
         </p>

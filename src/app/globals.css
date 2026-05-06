@@ -45,18 +45,18 @@
 }
 
 /* Welcome card hover animations */
-.group:hover .corner-tl {
+.animate-corner-tl {
   transform-origin: top left;
   animation: corner-pop 0.3s ease both;
 }
-.group:hover .corner-br {
+.animate-corner-br {
   transform-origin: bottom right;
   animation: corner-pop 0.3s ease 0.05s both;
 }
-.group:hover .card-icon {
+.animate-slide-left {
   animation: slide-from-left 0.4s ease 0.15s both;
 }
-.group:hover .card-text {
+.animate-slide-right {
   animation: slide-from-right 0.4s ease 0.2s both;
 }
 
