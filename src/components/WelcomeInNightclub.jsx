@@ -1,3 +1,6 @@
+"use client";
+
+import { useState } from "react";
 import Image from "next/image";
 import { IoRestaurant } from "react-icons/io5";
 import { FaChampagneGlasses } from "react-icons/fa6";
@@ -26,62 +29,87 @@ const cards = [
   },
 ];
 
+const Card = ({ src, icon: Icon, label, description }) => {
+  const [hovered, setHovered] = useState(false);
+
+  return (
+    <div
+      className="relative w-75 h-95 overflow-hidden cursor-pointer"
+      onMouseEnter={() => setHovered(true)}
+      onMouseLeave={() => setHovered(false)}
+    >
+      {/* Default: photo */}
+      <div
+        className={`absolute inset-0 transition-opacity duration-300 ${
+          hovered ? "opacity-0" : "opacity-100"
+        }`}
+      >
+        <Image src={src} alt={label} fill style={{ objectFit: "cover" }} />
+      </div>
+
+      {/* Hover: info card */}
+      <div
+        className={`absolute inset-0 bg-(--color-bg) transition-opacity duration-300 flex flex-col items-center justify-center text-center px-6 gap-4 ${
+          hovered ? "opacity-100" : "opacity-0"
+        }`}
+      >
+        {/* Corner accents */}
+        <div
+          key={hovered ? "tl-on" : "tl-off"}
+          className={`absolute top-0 left-0 w-6 h-6 bg-(--color-brand) ${
+            hovered ? "animate-corner-tl" : ""
+          }`}
+          style={{ clipPath: "polygon(0 0, 100% 0, 0 100%)" }}
+        />
+        <div
+          key={hovered ? "br-on" : "br-off"}
+          className={`absolute bottom-0 right-0 w-6 h-6 bg-(--color-brand) ${
+            hovered ? "animate-corner-br" : ""
+          }`}
+          style={{ clipPath: "polygon(100% 100%, 0 100%, 100% 0)" }}
+        />
+
+        {/* Icon */}
+        <div
+          key={hovered ? "icon-on" : "icon-off"}
+          className={`border border-(--color-brand) p-4 ${
+            hovered ? "animate-slide-left" : ""
+          }`}
+        >
+          {typeof Icon === "string" ? (
+            <img src={Icon} alt={label} className="w-10 h-10" />
+          ) : (
+            <Icon size={40} className="text-(--color-brand)" />
+          )}
+        </div>
+
+        <h3
+          key={hovered ? "h3-on" : "h3-off"}
+          className={`text-white font-bold tracking-widest text-lg ${
+            hovered ? "animate-slide-right" : ""
+          }`}
+        >
+          {label}
+        </h3>
+        <p
+          key={hovered ? "p-on" : "p-off"}
+          className={`text-white text-sm leading-relaxed ${
+            hovered ? "animate-slide-right" : ""
+          }`}
+        >
+          {description}
+        </p>
+      </div>
+    </div>
+  );
+};
+
 const WelcomeInNightclub = () => {
   return (
     <div className="flex justify-center gap-8 mt-12 mb-1">
-      {cards.map(
-        ({ src, icon: Icon, label, description }) => (
-          <div
-            key={label}
-            className="relative w-75 h-95 overflow-hidden group cursor-pointer"
-          >
-            {/* Default: photo */}
-            <div className="absolute inset-0 transition-opacity duration-300 group-hover:opacity-0">
-              <Image
-                src={src}
-                alt={label}
-                fill
-                style={{ objectFit: "cover" }}
-              />
-            </div>
-
-            {/* Hover: info card */}
-            <div className="absolute inset-0 bg-(--color-bg) opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col items-center justify-center text-center px-6 gap-4">
-              {/* Corner accents */}
-              <div
-                className="absolute top-0 left-0 w-6 h-6 bg-(--color-brand)"
-                style={{
-                  clipPath:
-                    "polygon(0 0, 100% 0, 0 100%)",
-                }}
-              />
-              <div
-                className="absolute bottom-0 right-0 w-6 h-6 bg-(--color-brand)"
-                style={{
-                  clipPath:
-                    "polygon(100% 100%, 0 100%, 100% 0)",
-                }}
-              />
-
-              {/* Icon */}
-              <div className="border border-(--color-brand) p-4">
-                {typeof Icon === "string" ? (
-                  <img src={Icon} alt={label} className="w-10 h-10" />
-                ) : (
-                  <Icon size={40} className="text-(--color-brand)" />
-                )}
-              </div>
-
-              <h3 className="text-white font-bold tracking-widest text-lg">
-                {label}
-              </h3>
-              <p className="text-white text-sm leading-relaxed">
-                {description}
-              </p>
-            </div>
-          </div>
-        )
-      )}
+      {cards.map((card) => (
+        <Card key={card.label} {...card} />
+      ))}
     </div>
   );
 };
