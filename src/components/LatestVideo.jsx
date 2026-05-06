@@ -15,16 +15,16 @@ const LatestVideo = () => {
   const next = () => setCurrent((i) => (i + 1) % videos.length);
 
   return (
-    <div className="flex flex-col items-center gap-6">
+    <div className="flex flex-col items-center gap-6 px-4 md:px-8 w-full">
       {/* Video with corner accents */}
       <div className="relative w-full max-w-4xl">
         {/* Corner accents */}
         <div
-          className="absolute top-0 left-0 w-10 h-10 bg-(--color-brand) z-10"
+          className="absolute top-0 left-0 w-6 h-6 md:w-10 md:h-10 bg-(--color-brand) z-10"
           style={{ clipPath: "polygon(0 0, 100% 0, 0 100%)" }}
         />
         <div
-          className="absolute bottom-0 right-0 w-10 h-10 bg-(--color-brand) z-10"
+          className="absolute bottom-0 right-0 w-6 h-6 md:w-10 md:h-10 bg-(--color-brand) z-10"
           style={{ clipPath: "polygon(100% 100%, 0 100%, 100% 0)" }}
         />
 
