@@ -102,7 +102,7 @@ const Card = ({ src, icon: Icon, label, description }) => {
 
 const WelcomeInNightclub = () => {
   return (
-    <div className="flex flex-col md:flex-row justify-center items-center gap-8 mt-12 mb-1 px-4">
+    <div className="flex flex-col md:flex-row justify-center items-center gap-8 mt-12 mb-12 px-4">
       {cards.map((card) => (
         <Card key={card.label} {...card} />
       ))}
