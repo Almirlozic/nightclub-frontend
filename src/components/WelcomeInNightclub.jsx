@@ -96,11 +96,41 @@ const Card = ({ src, icon: Icon, label, description }) => {
 
 const WelcomeInNightclub = () => {
   return (
-    <div className="flex flex-col md:flex-row justify-center items-center gap-8 mt-12 mb-12 px-4">
-      {cards.map((card) => (
-        <Card key={card.label} {...card} />
-      ))}
-    </div>
+    <>
+      <style>{`
+        @keyframes slide-from-left {
+          from { opacity: 0; transform: translateX(-24px); }
+          to   { opacity: 1; transform: translateX(0); }
+        }
+        @keyframes slide-from-right {
+          from { opacity: 0; transform: translateX(24px); }
+          to   { opacity: 1; transform: translateX(0); }
+        }
+        @keyframes corner-pop {
+          from { transform: scale(0); }
+          to   { transform: scale(1); }
+        }
+        .nc-corner-tl {
+          transform-origin: top left;
+          animation: corner-pop 0.3s ease both;
+        }
+        .nc-corner-br {
+          transform-origin: bottom right;
+          animation: corner-pop 0.3s ease 0.05s both;
+        }
+        .nc-slide-left {
+          animation: slide-from-left 0.4s ease 0.15s both;
+        }
+        .nc-slide-right {
+          animation: slide-from-right 0.4s ease 0.2s both;
+        }
+      `}</style>
+      <div className="flex flex-col md:flex-row justify-center items-center gap-8 mt-12 mb-12 px-4">
+        {cards.map((card) => (
+          <Card key={card.label} {...card} />
+        ))}
+      </div>
+    </>
   );
 };
 
