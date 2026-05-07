@@ -2,6 +2,7 @@
 
 import Image from "next/image";
 import { useState } from "react";
+import BtnNormal from "./BtnNormal";
 
 export default function EventsCalender({ events }) {
   const pageSize = 3;
@@ -50,6 +51,11 @@ export default function EventsCalender({ events }) {
                 <span className="text-(--color-text)"> | {event.location}</span>
               </p>
               <p className="mt-4 text-sm">{event.description}</p>
+              <BtnNormal
+                href="/"
+                title="READ MORE"
+                className={`mt-10 self-start ${isEven ? "md:self-start" : "md:self-end"}`}
+              />
             </div>
           </div>
         );
