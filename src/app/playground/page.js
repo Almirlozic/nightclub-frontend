@@ -6,7 +6,7 @@ import LatestVideo from "@/components/LatestVideo";
 export default function Playground() {
   return (
     <div className="bg-(--color-bg) text-white mb-12">
-        <H2Normal title="Welcome in Nightclub" />
+        <H2Normal title="Welcome in Nightclub" bgImage="/assets/bg/footerbg.jpg" />
       <WelcomeInNightclub />
         <H2Normal title="Latest Video" />
       <LatestVideo />
