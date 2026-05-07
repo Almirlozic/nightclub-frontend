@@ -1,7 +1,7 @@
 import  WelcomeInNightclub from "@/components/WelcomeInNightclub";
 import H2Normal from "@/components/H2Normal";
 import LatestVideo from "@/components/LatestVideo";
-
+import FeauteredEvents from "@/components/FeauteredEvents";
 
 export default function Playground() {
   return (
@@ -10,6 +10,8 @@ export default function Playground() {
       <WelcomeInNightclub />
         <H2Normal title="Latest Video" />
       <LatestVideo />
+        <H2Normal title="Feautered Events" />
+        <FeauteredEvents />
     </div>
   );
 }
