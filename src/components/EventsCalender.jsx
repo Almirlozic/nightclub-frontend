@@ -18,7 +18,7 @@ export default function EventsCalender({ events }) {
         const isEven = index % 2 === 0;
 
         return (
-          <div key={event.id} className="grid grid-cols-1 md:grid-cols-2 gap-2 mb-10">
+          <div key={event.id} className="grid grid-cols-1 md:grid-cols-2 gap-2 mb-10 mt-10">
             <div className={isEven ? "order-1" : "md:order-2"}>
               <Image
                 src={`https://nightclub-api-dhqe.onrender.com${event.asset.url}`}
