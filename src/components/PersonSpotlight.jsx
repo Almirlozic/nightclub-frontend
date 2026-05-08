@@ -90,7 +90,16 @@ const PersonSpotlight = () => {
         .ps-exit-left   { animation: ps-exit-left   0.45s cubic-bezier(0.4, 0, 0.2, 1) both; }
         .ps-exit-right  { animation: ps-exit-right  0.45s cubic-bezier(0.4, 0, 0.2, 1) both; }
       `}</style>
-      <div className="flex flex-col items-center px-4 py-16">
+      <div
+        className="relative flex flex-col items-center px-4 py-16"
+        style={{
+          backgroundImage: "url('/assets/bg/footerbg.jpg')",
+          backgroundSize: "cover",
+          backgroundPosition: "center",
+          backgroundRepeat: "no-repeat",
+        }}
+      >
+        <div className="absolute inset-0 bg-black/85" />
         <div className="relative w-full max-w-2xl overflow-hidden">
           {prevPerson && (
             <div
@@ -107,7 +116,7 @@ const PersonSpotlight = () => {
             {renderSlide(person, scrollRef)}
           </div>
         </div>
-        <div className="flex gap-2 mt-8">
+        <div className="relative flex gap-2 mt-8">
           {people.map((_, i) => (
             <button
               key={i}
