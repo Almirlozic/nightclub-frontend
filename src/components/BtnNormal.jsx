@@ -3,7 +3,7 @@
 import Link from "next/link";
 import { motion } from "framer-motion";
 
-export default function BtnNormal({ href, title, className = "" }) {
+export default function BtnNormal({ href, title, className = "", onClick }) {
   return (
     <motion.div
       className={`relative inline-flex px-4 py-2 ${className}`}
@@ -19,7 +19,11 @@ export default function BtnNormal({ href, title, className = "" }) {
         }}
         transition={{ duration: 0.25 }}
       >
-        <Link href={href}>{title}</Link>
+        {onClick ? (
+          <button type="button" onClick={onClick} className="cursor-pointer">{title}</button>
+        ) : (
+          <Link href={href}>{title}</Link>
+        )}
       </motion.span>
       <div className="absolute top-0 left-0 w-full h-0.5 bg-white" />
       <div className="absolute bottom-0 left-0 w-full h-0.5 bg-white" />
