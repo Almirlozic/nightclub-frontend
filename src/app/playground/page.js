@@ -3,6 +3,7 @@ import H2Normal from "@/components/H2Normal";
 import LatestVideo from "@/components/LatestVideo";
 import FeauteredEvents from "@/components/FeauteredEvents";
 import PersonSpotlight from "@/components/PersonSpotlight";
+import Newsletter from "@/components/Newsletter";
 
 export default function Playground() {
   return (
@@ -14,6 +15,7 @@ export default function Playground() {
         <H2Normal title="Feautered Events" />
         <FeauteredEvents />
         <PersonSpotlight />
+        <Newsletter />
     </div>
   );
 }
