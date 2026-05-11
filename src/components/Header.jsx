@@ -11,7 +11,7 @@ const STAGGER = 0.025;
 const links = [
   { label: "HOME", href: "/" },
   { label: "EVENTS", href: "/events" },
-  { label: "BOOK TABLE", href: "/book" },
+  { label: "BOOK TABLE", href: "/BookTable" },
   { label: "CONTACT US", href: "/contact" },
 ];
 
