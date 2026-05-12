@@ -1,8 +1,9 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, useCallback } from "react";
 import Image from "next/image";
 import Link from "next/link";
+import useEmblaCarousel from "embla-carousel-react";
 
 const formatDate = (iso) =>
   new Date(iso).toLocaleDateString("en-GB", { day: "2-digit", month: "short" });
@@ -26,13 +27,11 @@ const EventCard = ({ event }) => {
         style={{ objectFit: "cover" }}
       />
 
-      {/* Dim overlay */}
       <div
         className="absolute inset-0 bg-black transition-opacity duration-300"
         style={{ opacity: hovered ? 0.55 : 0 }}
       />
 
-      {/* Corner accents */}
       <div
         className="absolute top-0 left-0 w-8 h-8 bg-(--color-brand) z-10"
         style={{
@@ -59,17 +58,15 @@ const EventCard = ({ event }) => {
         }}
       />
 
-      {/* Book Now — slides from top */}
       <div
         className="absolute top-0 left-0 right-0 flex justify-center pt-10 z-10 transition-transform duration-300"
         style={{ transform: hovered ? "translateY(0)" : "translateY(-130%)" }}
-          >
+      >
         <Link href="/BookTable" className="bg-(--color-brand) text-white font-bold tracking-widest px-10 py-3 text-sm">
           Book Now
         </Link>
       </div>
 
-      {/* Title + description — slides up */}
       <div
         className="absolute left-0 right-0 z-10 px-6 py-5 transition-transform duration-300"
         style={{
@@ -83,7 +80,6 @@ const EventCard = ({ event }) => {
         <p className="text-white text-sm leading-relaxed">{event.description}</p>
       </div>
 
-      {/* Info bar — always visible */}
       <div className="absolute bottom-0 left-0 right-0 z-10 bg-(--color-brand) px-6 h-12 flex items-center gap-6 text-white text-sm font-semibold">
         <span className="shrink-0">{formatDate(event.date)}</span>
         <span className="truncate">{event.title}</span>
@@ -95,9 +91,9 @@ const EventCard = ({ event }) => {
 
 const FeauteredEvents = () => {
   const [events, setEvents] = useState([]);
-  const [current, setCurrent] = useState(0);
-  const [prev, setPrev] = useState(null);
-  const [direction, setDirection] = useState("right");
+  const [emblaRef, emblaApi] = useEmblaCarousel({ loop: false });
+  const [selectedIndex, setSelectedIndex] = useState(0);
+  const [scrollSnaps, setScrollSnaps] = useState([]);
 
   useEffect(() => {
     fetch("https://nightclub-api-dhqe.onrender.com/events", { cache: "no-store" })
@@ -105,29 +101,24 @@ const FeauteredEvents = () => {
       .then((data) => setEvents(data));
   }, []);
 
-  const goTo = (i) => {
-    if (i === current) return;
-    setDirection(i > current ? "right" : "left");
-    setPrev(current);
-    setCurrent(i);
-    setTimeout(() => setPrev(null), 500);
-  };
+  const onSelect = useCallback(() => {
+    if (!emblaApi) return;
+    setSelectedIndex(emblaApi.selectedScrollSnap());
+  }, [emblaApi]);
+
+  useEffect(() => {
+    if (!emblaApi) return;
+    setScrollSnaps(emblaApi.scrollSnapList());
+    emblaApi.on("select", onSelect);
+    onSelect();
+  }, [emblaApi, onSelect]);
 
   if (events.length === 0) return null;
 
-  const pairs = Math.ceil(events.length / 2);
-  const currentPair = events.slice(current * 2, current * 2 + 2);
-  const prevPair = prev !== null ? events.slice(prev * 2, prev * 2 + 2) : null;
-
-  const renderCards = (pair) => (
-    <div className="flex flex-col md:flex-row gap-8 w-full">
-      {pair.map((event) => (
-        <div key={event.id} className="flex-1">
-          <EventCard event={event} />
-        </div>
-      ))}
-    </div>
-  );
+  const pairs = [];
+  for (let i = 0; i < events.length; i += 2) {
+    pairs.push(events.slice(i, i + 2));
+  }
 
   return (
     <>
@@ -139,59 +130,33 @@ const FeauteredEvents = () => {
           background-repeat: no-repeat;
         }
       `}</style>
-      <style>{`
-        @keyframes fe-enter-right {
-          from { transform: translateX(100%); opacity: 0.6; }
-          to   { transform: translateX(0);    opacity: 1; }
-        }
-        @keyframes fe-enter-left {
-          from { transform: translateX(-100%); opacity: 0.6; }
-          to   { transform: translateX(0);     opacity: 1; }
-        }
-        @keyframes fe-exit-left {
-          from { transform: translateX(0);     opacity: 1; }
-          to   { transform: translateX(-100%); opacity: 0.6; }
-        }
-        @keyframes fe-exit-right {
-          from { transform: translateX(0);    opacity: 1; }
-          to   { transform: translateX(100%); opacity: 0.6; }
-        }
-        .fe-enter-right { animation: fe-enter-right 0.45s cubic-bezier(0.4, 0, 0.2, 1) both; }
-        .fe-enter-left  { animation: fe-enter-left  0.45s cubic-bezier(0.4, 0, 0.2, 1) both; }
-        .fe-exit-left   { animation: fe-exit-left   0.45s cubic-bezier(0.4, 0, 0.2, 1) both; }
-        .fe-exit-right  { animation: fe-exit-right  0.45s cubic-bezier(0.4, 0, 0.2, 1) both; }
-      `}</style>
       <div className="fe-wrapper flex flex-col items-center gap-6 px-4 sm:px-8 py-12 mb-12">
-        <div className="relative w-full max-w-4xl overflow-hidden">
-          {/* Exiting pair */}
-          {prevPair && (
-            <div
-              key={`exit-${prev}`}
-              className={`absolute inset-0 ${direction === "right" ? "fe-exit-left" : "fe-exit-right"}`}
-            >
-              {renderCards(prevPair)}
-            </div>
-          )}
-          {/* Entering pair */}
-          <div
-            key={`enter-${current}`}
-            className={prevPair ? (direction === "right" ? "fe-enter-right" : "fe-enter-left") : ""}
-          >
-            {renderCards(currentPair)}
+        <div className="w-full max-w-4xl overflow-hidden" ref={emblaRef}>
+          <div className="flex">
+            {pairs.map((pair, i) => (
+              <div key={i} className="flex-[0_0_100%] min-w-0">
+                <div className="flex flex-col md:flex-row gap-8 w-full">
+                  {pair.map((event) => (
+                    <div key={event.id} className="flex-1">
+                      <EventCard event={event} />
+                    </div>
+                  ))}
+                </div>
+              </div>
+            ))}
           </div>
         </div>
 
-        {/* Dot navigation */}
         <div className="flex gap-3">
-          {Array.from({ length: pairs }).map((_, i) => (
+          {scrollSnaps.map((_, i) => (
             <button
               key={i}
-              onClick={() => goTo(i)}
+              onClick={() => emblaApi?.scrollTo(i)}
               className="w-4 h-4 transition-colors duration-200"
               style={{
-                background: i === current ? "var(--color-brand)" : "transparent",
+                background: i === selectedIndex ? "var(--color-brand)" : "transparent",
                 border: "2px solid",
-                borderColor: i === current ? "var(--color-brand)" : "white",
+                borderColor: i === selectedIndex ? "var(--color-brand)" : "white",
               }}
               aria-label={`Go to events ${i * 2 + 1} and ${i * 2 + 2}`}
             />
