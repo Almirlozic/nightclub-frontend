@@ -5,6 +5,7 @@ const nextConfig = {
       {
         protocol: "https",
         hostname: "nightclub-api-dhqe.onrender.com",
+        pathname: "/**",
       },
     ],
   },

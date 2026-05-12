@@ -29,7 +29,6 @@
   --font-sans: var(--font-ubuntu);
 }
 
-
 body {
   background: var(--color-bg);
   color: var(--color-text);
@@ -60,4 +59,33 @@ header.header-corners::after {
   bottom: 0;
   right: 0;
   clip-path: polygon(100% 100%, 0 100%, 100% 0);
+}
+.image-corners::before,
+.image-corners::after {
+  content: "";
+  position: absolute;
+  width: 34px;
+  height: 34px;
+  background: var(--color-brand);
+
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  pointer-events: none;
+}
+
+.image-corners::before {
+  top: 0;
+  left: 0;
+  clip-path: polygon(0 0, 100% 0, 0 100%);
+}
+
+.image-corners::after {
+  bottom: 0;
+  right: 0;
+  clip-path: polygon(100% 100%, 0 100%, 100% 0);
+}
+
+.image-corners:hover::before,
+.image-corners:hover::after {
+  opacity: 1;
 }
