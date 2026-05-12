@@ -8,16 +8,30 @@ export default function Newsletter() {
   const [email, setEmail] = useState("");
   const [showPopup, setShowPopup] = useState(false);
   const [error, setError] = useState("");
+  const [loading, setLoading] = useState(false);
 
-  const handleSubscribe = () => {
+  const handleSubscribe = async () => {
     if (!email || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
       setError("Please enter a valid email address.");
       return;
     }
     setError("");
-    setEmail("");
-    setShowPopup(true);
-    setTimeout(() => setShowPopup(false), 4000);
+    setLoading(true);
+    try {
+      const res = await fetch("https://nightclub-api-dhqe.onrender.com/newsletters", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ email }),
+      });
+      if (!res.ok) throw new Error("Subscription failed");
+      setEmail("");
+      setShowPopup(true);
+      setTimeout(() => setShowPopup(false), 4000);
+    } catch {
+      setError("Something went wrong. Please try again.");
+    } finally {
+      setLoading(false);
+    }
   };
 
   return (
@@ -41,7 +55,7 @@ export default function Newsletter() {
             className="w-full bg-transparent text-white placeholder-white/50 py-2 outline-none"
           />
         </div>
-        <BtnNormal title="SUBSCRIBE" onClick={handleSubscribe} />
+        <BtnNormal title={loading ? "SUBSCRIBING..." : "SUBSCRIBE"} onClick={handleSubscribe} disabled={loading} />
       </div>
 
       {error && (
