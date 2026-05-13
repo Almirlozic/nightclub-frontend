@@ -34,7 +34,7 @@ const Footer = () => {
         <div className="absolute inset-0 bg-black/85" />
 
         <div className="relative z-10 grid grid-cols-1 min-[909px]:grid-cols-3 gap-4 min-[909px]:gap-6 lg:gap-12 px-6 min-[909px]:px-8 lg:px-16 py-12 lg:py-24">
-          {/* Column 1: Brand + Location + Hours */}
+          
           <div className="flex flex-col items-center min-[909px]:items-start gap-8 min-[909px]:gap-0 min-[909px]:justify-between h-full text-center min-[909px]:text-left">
             <div>
               <p className="text-white text-3xl font-bold">
