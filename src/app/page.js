@@ -21,7 +21,6 @@ export default function Home() {
             <LatestVideo />
       <H2Normal title="Person Spotlight" />
             <PersonSpotlight />
-      <H2Normal title="Newsletter" />
             <Newsletter />
     </div>
   );
