@@ -21,8 +21,8 @@ export default function EventsCalender({ events }) {
           <div key={event.id} className="grid grid-cols-1 md:grid-cols-2 gap-2 mb-10 mt-10">
             <div className={isEven ? "order-1" : "md:order-2"}>
               <Image
-                src={`https://nightclub-api-dhqe.onrender.com${event.asset.url}`}
-                alt={event.asset?.alt || "event image"}
+                src={`https://nightclub-api-dhqe.onrender.com${event.heroAsset.url}`}
+                alt={event.heroAsset?.alt || "event image"}
                 width={800}
                 height={800}
                 className="w-full h-68 object-center"
