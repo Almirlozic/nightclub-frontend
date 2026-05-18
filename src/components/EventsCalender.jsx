@@ -52,7 +52,7 @@ export default function EventsCalender({ events }) {
               </p>
               <p className="mt-4 text-sm">{event.description}</p>
               <BtnNormal
-                href="/"
+                href={`/detailview/${event.slug}`}
                 title="READ MORE"
                 className={`mt-10 self-start ${isEven ? "md:self-start" : "md:self-end"}`}
               />
