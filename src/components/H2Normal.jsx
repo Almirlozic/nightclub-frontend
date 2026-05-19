@@ -1,7 +1,7 @@
 import Image from "next/image";
 
 const H2Normal = ({ title, bgImage = null }) => {
-  return (
+  return (  
     <div className="relative flex flex-col items-center gap-3 px-4 py-10 overflow-hidden">
       {bgImage && (
   <>
