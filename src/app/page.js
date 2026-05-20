@@ -1,5 +1,4 @@
 import Header from "@/components/Header";
-import Image from "next/image";
 import Hero from "@/components/Hero";
 import WelcomeInNightclub from "@/components/WelcomeInNightclub";
 import H2Normal from "@/components/H2Normal";
@@ -13,6 +12,7 @@ export default function Home() {
   return (
     <div>
       <Hero />
+      <Header />
       <H2Normal title="Welcome in Nightclub" />
             <WelcomeInNightclub />
       <H2Normal title="Feautered events" />
