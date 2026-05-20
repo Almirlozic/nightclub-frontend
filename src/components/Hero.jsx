@@ -55,13 +55,23 @@ export default function Hero() {
           {...rollIn(0.4)}
         >
           <BtnNormal href="/events" title="VIEW EVENTS" className="text-sm font-bold tracking-widest" />
-          <Link
-            href="/BookTable"
-            className="px-6 py-2 text-sm font-bold tracking-widest text-white uppercase transition-opacity hover:opacity-80"
-            style={{ background: "linear-gradient(to right, #e91e8c, #9b27af)" }}
+          <motion.div
+            className="flex items-center"
+            style={{
+              background: "linear-gradient(to right, #e91e8c, #9b27af, #e91e8c)",
+              backgroundSize: "200% 100%",
+              backgroundPosition: "0% 50%",
+            }}
+            whileHover={{ backgroundPosition: "100% 50%" }}
+            transition={{ duration: 0.6, ease: "easeInOut" }}
           >
-            BOOK TABLE
-          </Link>
+            <Link
+              href="/BookTable"
+              className="flex items-center px-6 py-2 text-sm font-bold tracking-widest text-white uppercase"
+            >
+              BOOK TABLE
+            </Link>
+          </motion.div>
         </motion.div>
       </div>
     </section>
