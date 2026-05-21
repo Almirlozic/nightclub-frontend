@@ -8,7 +8,11 @@ import Gallery from "@/components/Gallery";
 import PersonSpotlight from "@/components/PersonSpotlight";
 import Newsletter from "@/components/Newsletter";
 
-export default function Home() {
+export default async function Home() {
+  const res = await fetch("https://nightclub-api-dhqe.onrender.com/events", { next: { revalidate: 60 } });
+  const allEvents = await res.json();
+  const featuredEvents = allEvents.filter((e) => e.isFeatured);
+
   return (
     <div>
       <Hero />
@@ -16,7 +20,7 @@ export default function Home() {
       <H2Normal title="Welcome in Nightclub" />
             <WelcomeInNightclub />
       <H2Normal title="Feautered events" />
-            <FeauteredEvents />
+            <FeauteredEvents events={featuredEvents} />
       <H2Normal title="Nightclub gallery" />
             <Gallery />
       <H2Normal title="Latest Video" />

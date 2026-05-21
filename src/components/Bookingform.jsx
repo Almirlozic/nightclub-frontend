@@ -21,6 +21,7 @@ export default function BookingForm({
   setSelectedTable,
   selectedEvent,
   setSelectedEvent,
+  initialEventId,
 }) {
   const [events, setEvents] = useState([]);
   const [form, setForm] = useState({ name: "", email: "", guests: "", phone: "", comment: "" });
@@ -31,7 +32,13 @@ export default function BookingForm({
   useEffect(() => {
     fetch(`${API}/events`)
       .then((r) => r.json())
-      .then(setEvents);
+      .then((data) => {
+        setEvents(data);
+        if (initialEventId) {
+          const match = data.find((ev) => String(ev.id) === String(initialEventId));
+          if (match) setSelectedEvent(match);
+        }
+      });
   }, []);
 
   const set = (field) => (e) => setForm((f) => ({ ...f, [field]: e.target.value }));
