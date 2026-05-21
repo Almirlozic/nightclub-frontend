@@ -6,7 +6,7 @@ import BookingForm from "./Bookingform";
 
 const API = "https://nightclub-api-dhqe.onrender.com";
 
-export default function BookTable() {
+export default function BookTable({ initialEventId }) {
   const [selectedTable, setSelectedTable] = useState(null);
   const [selectedEvent, setSelectedEvent] = useState(null);
   const [reservedTables, setReservedTables] = useState([]);
@@ -33,6 +33,7 @@ export default function BookTable() {
         setSelectedTable={setSelectedTable}
         selectedEvent={selectedEvent}
         setSelectedEvent={setSelectedEvent}
+        initialEventId={initialEventId}
       />
     </div>
   );

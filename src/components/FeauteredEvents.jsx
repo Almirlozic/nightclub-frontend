@@ -16,7 +16,7 @@ const EventCard = ({ event }) => {
 
   return (
     <div
-      className="relative w-full h-[320px] sm:h-[400px] md:h-[480px] overflow-hidden cursor-pointer"
+      className="relative w-full h-80 sm:h-sm-100 md:h-120 overflow-hidden cursor-pointer"
       onMouseEnter={() => setHovered(true)}
       onMouseLeave={() => setHovered(false)}
     >
@@ -62,7 +62,10 @@ const EventCard = ({ event }) => {
         className="absolute top-0 left-0 right-0 flex justify-center pt-10 z-10 transition-transform duration-300"
         style={{ transform: hovered ? "translateY(0)" : "translateY(-130%)" }}
       >
-        <Link href="/BookTable" className="bg-(--color-brand) text-white font-bold tracking-widest px-10 py-3 text-sm">
+        <Link
+          href={`/BookTable?eventId=${event.id}`}
+          className="bg-(--color-brand) text-white font-bold tracking-widest px-10 py-3 text-sm"
+        >
           Book Now
         </Link>
       </div>
@@ -74,10 +77,15 @@ const EventCard = ({ event }) => {
           transform: hovered ? "translateY(0)" : "translateY(120%)",
         }}
       >
-        <h3 className="text-white font-bold tracking-widest text-lg mb-2">
+        <h3 className="text-white font-bold tracking-widest text-lg mb-1">
           {event.title}
         </h3>
-        <p className="text-white text-sm leading-relaxed">{event.description}</p>
+        <p className="text-white text-sm leading-relaxed mb-1">{event.description}</p>
+        {event.location && (
+          <p className="text-(--color-brand) text-xs font-semibold tracking-widest uppercase">
+            {event.location}
+          </p>
+        )}
       </div>
 
       <div className="absolute bottom-0 left-0 right-0 z-10 bg-(--color-brand) px-6 h-12 flex items-center gap-6 text-white text-sm font-semibold">
@@ -89,17 +97,10 @@ const EventCard = ({ event }) => {
   );
 };
 
-const FeauteredEvents = () => {
-  const [events, setEvents] = useState([]);
+const FeauteredEvents = ({ events = [] }) => {
   const [emblaRef, emblaApi] = useEmblaCarousel({ loop: false });
   const [selectedIndex, setSelectedIndex] = useState(0);
   const [scrollSnaps, setScrollSnaps] = useState([]);
-
-  useEffect(() => {
-    fetch("https://nightclub-api-dhqe.onrender.com/events", { cache: "no-store" })
-      .then((res) => res.json())
-      .then((data) => setEvents(data));
-  }, []);
 
   const onSelect = useCallback(() => {
     if (!emblaApi) return;
