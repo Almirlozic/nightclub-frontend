@@ -336,6 +336,18 @@ header.header-corners::after {
   border-radius: 4px;
 }
 
+.comments-scroll::-webkit-scrollbar {
+  width: 2px;
+}
+
+.comments-scroll::-webkit-scrollbar-track {
+  background: oklch(100% 0 0 / 0.05);
+}
+
+.comments-scroll::-webkit-scrollbar-thumb {
+  background: var(--color-brand);
+}
+
 .mobile-nav__footer {
   position: absolute;
   bottom: 28px;

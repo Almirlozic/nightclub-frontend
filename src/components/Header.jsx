@@ -195,7 +195,7 @@ const Header = () => {
   };
 
   return (
-    <header className="sticky top-0 z-50 bg-black flex justify-between md:justify-around items-center border-b border-t border-(--color-brand) py-6 px-6 md:px-0 overflow-hidden header-corners">
+    <header className="relative z-50 flex justify-between md:justify-around items-center border-b border-t border-(--color-brand) py-6 px-6 md:px-0 overflow-hidden header-corners">
       <div>
         <p className="text-(--color-text) text-3xl font-bold">
           NIGHT<span className="text-(--color-brand)">CLUB</span>
