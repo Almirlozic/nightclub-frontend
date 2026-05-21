@@ -4,7 +4,9 @@ export default function PagesLayout({ children }) {
   return (
     <>
       <Header />
-      {children}
+      <div className="pt-24">
+        {children}
+      </div>
     </>
   );
 }
