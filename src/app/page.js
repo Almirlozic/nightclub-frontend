@@ -18,16 +18,16 @@ export default async function Home() {
       <Hero />
       <Header />
       <H2Normal title="Welcome in Nightclub" />
-            <WelcomeInNightclub />
+      <WelcomeInNightclub />
       <H2Normal title="Feautered events" />
-            <FeauteredEvents events={featuredEvents} />
+      <FeauteredEvents events={featuredEvents} />
       <H2Normal title="Nightclub gallery" />
-            <Gallery />
+      <Gallery />
       <H2Normal title="Latest Video" />
-            <LatestVideo />
+      <LatestVideo />
       <H2Normal title="Person Spotlight" />
-            <PersonSpotlight />
-            <Newsletter />
+      <PersonSpotlight />
+      <Newsletter />
     </div>
   );
 }
