@@ -5,6 +5,7 @@ import H2Normal from "@/components/H2Normal";
 import LatestVideo from "@/components/LatestVideo";
 import FeauteredEvents from "@/components/FeauteredEvents";
 import Gallery from "@/components/Gallery";
+import Webplayer from "@/components/Webplayer";
 import PersonSpotlight from "@/components/PersonSpotlight";
 import Newsletter from "@/components/Newsletter";
 
@@ -23,6 +24,8 @@ export default async function Home() {
       <FeauteredEvents events={featuredEvents} />
       <H2Normal title="Nightclub gallery" />
       <Gallery />
+      <H2Normal title="Night Club Track" />
+      <Webplayer />
       <H2Normal title="Latest Video" />
       <LatestVideo />
       <PersonSpotlight />
