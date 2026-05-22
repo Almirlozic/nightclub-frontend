@@ -25,7 +25,6 @@ export default async function Home() {
       <Gallery />
       <H2Normal title="Latest Video" />
       <LatestVideo />
-      <H2Normal title="Person Spotlight" />
       <PersonSpotlight />
       <Newsletter />
     </div>
