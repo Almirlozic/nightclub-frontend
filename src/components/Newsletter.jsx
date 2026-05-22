@@ -23,6 +23,10 @@ export default function Newsletter() {
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ email }),
       });
+      if (res.status === 409) {
+        setError("This email is already subscribed.");
+        return;
+      }
       if (!res.ok) throw new Error("Subscription failed");
       setEmail("");
       setShowPopup(true);
