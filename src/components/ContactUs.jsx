@@ -33,14 +33,25 @@ const ContactUs = () => {
         return newErrors;
     };
 
-    const handleSubmit = (e) => {
+    const handleSubmit = async (e) => {
         e.preventDefault();
         const newErrors = validate();
         if (Object.keys(newErrors).length > 0) {
             setErrors(newErrors);
             return;
         }
-        setShowModal(true);
+        try {
+            const res = await fetch("https://nightclub-api-dhqe.onrender.com/contact_messages", {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify(form),
+            });
+            if (!res.ok) throw new Error();
+            setForm({ name: "", email: "", message: "" });
+            setShowModal(true);
+        } catch {
+            setErrors({ message: "Something went wrong. Please try again." });
+        }
     };
 
     return (
