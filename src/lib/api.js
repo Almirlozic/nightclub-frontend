@@ -71,3 +71,7 @@ export async function postReservation(data) {
 export async function deleteReservation(id) {
   return fetch(`${BASE_URL}/reservations/${id}`, { method: "DELETE" });
 }
+
+export async function deleteContactMessage(id) {
+  return fetch(`${BASE_URL}/contact_messages/${id}`, { method: "DELETE" });
+}

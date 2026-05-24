@@ -1,23 +1,6 @@
 import CommentForm from "./CommentForm";
 import DeleteButton from "./DeleteButton";
-<<<<<<< HEAD
 import { getComments, getContactMessages } from "@/lib/api";
-=======
-
-const fetchComments = async () => {
-  const [resComments, resMessages] = await Promise.all([
-    fetch("https://nightclub-api-dhqe.onrender.com/comments", { cache: "no-store" }),
-    fetch("https://nightclub-api-dhqe.onrender.com/contact_messages", { cache: "no-store" }),
-  ]);
-
-  const [comments, messages] = await Promise.all([resComments.json(), resMessages.json()]);
-
-  return [
-    ...comments.map((c) => ({ ...c, _key: `comment-${c.id}`, deletable: false })),
-    ...messages.map((m) => ({ ...m, _key: `message-${m.id}`, deletable: true })),
-  ].sort((a, b) => new Date(a.date) - new Date(b.date));
-};
->>>>>>> f8b4920d8abdc418d67fff4ee603d262c39c5d32
 
 const formatDate = (iso) =>
   new Date(iso).toLocaleDateString("da-DK", {

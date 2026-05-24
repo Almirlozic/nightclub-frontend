@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
+import { deleteContactMessage } from "@/lib/api";
 
 const getMyComments = () => JSON.parse(localStorage.getItem("myComments") || "[]");
 
@@ -16,9 +17,7 @@ const DeleteButton = ({ id }) => {
   if (!isOwn) return null;
 
   const handleDelete = async () => {
-    await fetch(`https://nightclub-api-dhqe.onrender.com/contact_messages/${id}`, {
-      method: "DELETE",
-    });
+    await deleteContactMessage(id);
     localStorage.setItem("myComments", JSON.stringify(getMyComments().filter((i) => i !== id)));
     router.refresh();
   };
