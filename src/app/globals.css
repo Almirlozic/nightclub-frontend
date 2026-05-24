@@ -336,6 +336,11 @@ header.header-corners::after {
   border-radius: 4px;
 }
 
+.comments-scroll {
+  scrollbar-width: thin;
+  scrollbar-color: var(--color-brand) oklch(100% 0 0 / 0.05);
+}
+
 .comments-scroll::-webkit-scrollbar {
   width: 2px;
 }

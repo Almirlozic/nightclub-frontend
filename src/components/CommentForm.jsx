@@ -5,6 +5,8 @@ import { useRouter } from "next/navigation";
 import BtnNormal from "./BtnNormal";
 import { postContactMessage } from "@/lib/api";
 
+const inputClass = "flex-1 bg-transparent border border-white/30 px-4 py-3 text-sm placeholder:text-white/40 focus:outline-none focus:border-(--color-brand)";
+
 const CommentForm = () => {
   const [form, setForm] = useState({ name: "", email: "", content: "" });
   const formRef = useRef(null);
@@ -14,7 +16,15 @@ const CommentForm = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    await postContactMessage(form);
+    const data = await fetch("https://nightclub-api-dhqe.onrender.com/contact_messages", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ ...form, date: new Date().toISOString() }),
+    }).then((r) => r.json());
+
+    const mine = JSON.parse(localStorage.getItem("myComments") || "[]");
+    localStorage.setItem("myComments", JSON.stringify([...mine, data.id]));
+
     setForm({ name: "", email: "", content: "" });
     router.refresh();
   };
@@ -31,7 +41,7 @@ const CommentForm = () => {
           value={form.name}
           onChange={handleChange}
           required
-          className="flex-1 bg-transparent border border-white/30 px-4 py-3 text-sm placeholder:text-white/40 focus:outline-none focus:border-(--color-brand)"
+          className={inputClass}
         />
         <input
           type="email"
@@ -40,7 +50,7 @@ const CommentForm = () => {
           value={form.email}
           onChange={handleChange}
           required
-          className="flex-1 bg-transparent border border-white/30 px-4 py-3 text-sm placeholder:text-white/40 focus:outline-none focus:border-(--color-brand)"
+          className={inputClass}
         />
       </div>
 
