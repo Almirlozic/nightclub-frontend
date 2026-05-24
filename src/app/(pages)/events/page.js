@@ -1,23 +1,12 @@
 import EventsCalender from "@/components/EventsCalender";
 import H2Normal from "@/components/H2Normal";
-
-async function getEvents() {
-  const res = await fetch("https://nightclub-api-dhqe.onrender.com/events", {
-    headers: {
-      "x-api-key": process.env.NIGHT_CLUB_API,
-    },
-    cache: "no-store",
-  });
-
-  if (!res.ok) {
-    throw new Error("Failed to fetch events");
-  }
-
-  return res.json();
-}
+import { getEvents } from "@/lib/api";
 
 export default async function Page() {
-  const events = await getEvents();
+  const events = await getEvents({
+    headers: { "x-api-key": process.env.NIGHT_CLUB_API },
+    cache: "no-store",
+  });
 
   return (
     <>

@@ -71,12 +71,7 @@ export default function Webplayer() {
 
   return (
     <div className="bg-black text-white py-10 px-6">
-      {/* Title */}
-      <div className="flex justify-center mb-8">
-        <h2 className="text-white text-2xl font-bold tracking-widest border-2 border-red-600 px-10 py-3">
-          NIGHT CLUB TRACK
-        </h2>
-      </div>
+     
 
       {/* Player */}
       <div className="flex gap-6 items-start max-w-4xl mx-auto">

@@ -3,6 +3,7 @@
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import BtnNormal from "./BtnNormal";
+import { postNewsletter } from "@/lib/api";
 
 export default function Newsletter() {
   const [email, setEmail] = useState("");
@@ -18,11 +19,11 @@ export default function Newsletter() {
     setError("");
     setLoading(true);
     try {
-      const res = await fetch("https://nightclub-api-dhqe.onrender.com/newsletters", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ email }),
-      });
+      const res = await postNewsletter(email);
+      if (res.status === 409) {
+        setError("This email is already subscribed.");
+        return;
+      }
       if (!res.ok) throw new Error("Subscription failed");
       setEmail("");
       setShowPopup(true);

@@ -1,5 +1,8 @@
 import CommentForm from "./CommentForm";
 import DeleteButton from "./DeleteButton";
+<<<<<<< HEAD
+import { getComments, getContactMessages } from "@/lib/api";
+=======
 
 const fetchComments = async () => {
   const [resComments, resMessages] = await Promise.all([
@@ -14,6 +17,7 @@ const fetchComments = async () => {
     ...messages.map((m) => ({ ...m, _key: `message-${m.id}`, deletable: true })),
   ].sort((a, b) => new Date(a.date) - new Date(b.date));
 };
+>>>>>>> f8b4920d8abdc418d67fff4ee603d262c39c5d32
 
 const formatDate = (iso) =>
   new Date(iso).toLocaleDateString("da-DK", {
@@ -23,7 +27,12 @@ const formatDate = (iso) =>
   });
 
 const Comments = async () => {
-  const comments = await fetchComments();
+  const [rawComments, rawMessages] = await Promise.all([getComments(), getContactMessages()]);
+
+  const comments = [
+    ...rawComments.map((c) => ({ ...c, _key: `comment-${c.id}`, deletable: false })),
+    ...rawMessages.map((m) => ({ ...m, _key: `message-${m.id}`, deletable: true })),
+  ].sort((a, b) => new Date(a.date) - new Date(b.date));
 
   return (
     <section>

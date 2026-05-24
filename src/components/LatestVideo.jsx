@@ -33,7 +33,7 @@ const LatestVideo = () => {
           className="w-full aspect-video object-cover"
           autoPlay
           muted
-          controls={false}
+          controls
         >
           <source src={videos[current]} type="video/mp4" />
         </video>
