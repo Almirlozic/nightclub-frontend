@@ -1,6 +1,23 @@
 import CommentForm from "./CommentForm";
 import DeleteButton from "./DeleteButton";
+<<<<<<< HEAD
 import { getComments, getContactMessages } from "@/lib/api";
+=======
+
+const fetchComments = async () => {
+  const [resComments, resMessages] = await Promise.all([
+    fetch("https://nightclub-api-dhqe.onrender.com/comments", { cache: "no-store" }),
+    fetch("https://nightclub-api-dhqe.onrender.com/contact_messages", { cache: "no-store" }),
+  ]);
+
+  const [comments, messages] = await Promise.all([resComments.json(), resMessages.json()]);
+
+  return [
+    ...comments.map((c) => ({ ...c, _key: `comment-${c.id}`, deletable: false })),
+    ...messages.map((m) => ({ ...m, _key: `message-${m.id}`, deletable: true })),
+  ].sort((a, b) => new Date(a.date) - new Date(b.date));
+};
+>>>>>>> f8b4920d8abdc418d67fff4ee603d262c39c5d32
 
 const formatDate = (iso) =>
   new Date(iso).toLocaleDateString("da-DK", {
@@ -21,7 +38,7 @@ const Comments = async () => {
     <section>
       <h2 className="mb-10 text-2xl">{comments.length} Comments</h2>
       <div className="relative">
-        <ul className="comments-scroll flex flex-col gap-6 list-none m-0 p-0 max-h-105 overflow-y-auto pr-4">
+        <ul className="comments-scroll flex flex-col gap-6 list-none m-0 p-0 max-h-105 overflow-y-scroll pr-4">
           {comments.map((comment) => (
             <li key={comment._key} className="pb-6">
               <div className="flex items-center gap-2 mb-2">
@@ -30,6 +47,7 @@ const Comments = async () => {
                 <time dateTime={comment.date} className="text-sm font-medium text-(--color-brand)">
                   {formatDate(comment.date)}
                 </time>
+                {comment.deletable && <div className="ml-auto"><DeleteButton id={comment.id} /></div>}
               </div>
               <p className="text-white/70 text-sm leading-relaxed m-0 line-clamp-3">{comment.content}</p>
             </li>
