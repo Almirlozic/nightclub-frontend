@@ -1,6 +1,7 @@
 "use client";
 import { useState } from 'react';
 import BtnNormal from "./BtnNormal";
+import { postContactMessage } from "@/lib/api";
 
 const SuccessModal = ({ onClose }) => (
     <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/70">
@@ -41,11 +42,7 @@ const ContactUs = () => {
             return;
         }
         try {
-            const res = await fetch("https://nightclub-api-dhqe.onrender.com/contact_messages", {
-                method: "POST",
-                headers: { "Content-Type": "application/json" },
-                body: JSON.stringify(form),
-            });
+            const res = await postContactMessage(form);
             if (!res.ok) throw new Error();
             setForm({ name: "", email: "", message: "" });
             setShowModal(true);

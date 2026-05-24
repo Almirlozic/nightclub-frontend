@@ -3,6 +3,7 @@
 import Image from "next/image";
 import { useState } from "react";
 import BtnNormal from "./BtnNormal";
+import { imageUrl } from "@/lib/api";
 
 export default function EventsCalender({ events }) {
   const pageSize = 3;
@@ -21,7 +22,7 @@ export default function EventsCalender({ events }) {
           <div key={event.id} className="grid grid-cols-1 md:grid-cols-2 gap-2 mb-10 mt-10">
             <div className={isEven ? "order-1" : "md:order-2"}>
               <Image
-                src={`https://nightclub-api-dhqe.onrender.com${event.heroAsset.url}`}
+                src={imageUrl(event.heroAsset.url)}
                 alt={event.heroAsset?.alt || "event image"}
                 width={800}
                 height={800}

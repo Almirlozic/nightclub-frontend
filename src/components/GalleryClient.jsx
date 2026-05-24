@@ -2,6 +2,7 @@
 import { useState } from "react";
 import Image from "next/image";
 import { motion } from "framer-motion";
+import { imageUrl } from "@/lib/api";
 
 const GalleryClient = ({ images = [] }) => {
   const [currentIndex, setCurrentIndex] = useState(null);
@@ -65,7 +66,7 @@ const GalleryClient = ({ images = [] }) => {
             onClick={() => setCurrentIndex(index)}
           >
             <Image
-              src={`https://nightclub-api-dhqe.onrender.com${image.asset.url}`}
+              src={imageUrl(image.asset.url)}
               alt={image.asset.alt}
               width={800}
               height={800}
@@ -91,7 +92,7 @@ const GalleryClient = ({ images = [] }) => {
             </button>
             <div className="bg-black w-fit mx-auto">
               <Image
-                src={`https://nightclub-api-dhqe.onrender.com${selectedImage.asset.url}`}
+                src={imageUrl(selectedImage.asset.url)}
                 alt={selectedImage.asset.alt}
                 width={selectedImage.asset.width}
                 height={selectedImage.asset.height}

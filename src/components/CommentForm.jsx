@@ -3,6 +3,7 @@
 import { useRef, useState } from "react";
 import { useRouter } from "next/navigation";
 import BtnNormal from "./BtnNormal";
+import { postContactMessage } from "@/lib/api";
 
 const CommentForm = () => {
   const [form, setForm] = useState({ name: "", email: "", content: "" });
@@ -13,11 +14,7 @@ const CommentForm = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    await fetch("https://nightclub-api-dhqe.onrender.com/contact_messages", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(form),
-    });
+    await postContactMessage(form);
     setForm({ name: "", email: "", content: "" });
     router.refresh();
   };

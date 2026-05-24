@@ -3,8 +3,7 @@
 import { useState, useEffect } from "react";
 import TableMap from "./TableMap";
 import BookingForm from "./Bookingform";
-
-const API = "https://nightclub-api-dhqe.onrender.com";
+import { getReservations } from "@/lib/api";
 
 export default function BookTable({ initialEventId }) {
   const [selectedTable, setSelectedTable] = useState(null);
@@ -16,8 +15,7 @@ export default function BookTable({ initialEventId }) {
       setReservedTables([]);
       return;
     }
-    fetch(`${API}/reservations?eventId=${selectedEvent.id}`)
-      .then((r) => r.json())
+    getReservations(selectedEvent.id)
       .then((data) => setReservedTables(data.map((r) => String(r.table))));
   }, [selectedEvent]);
 

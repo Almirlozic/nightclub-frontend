@@ -1,13 +1,5 @@
 import CommentForm from "./CommentForm";
-
-const fetchComments = async () => {
-  const res = await fetch("https://nightclub-api-dhqe.onrender.com/comments", {
-    cache: "no-store",
-  });
-
-  if (!res.ok) throw new Error("Kunne ikke hente kommentarer");
-  return res.json();
-};
+import { getComments } from "@/lib/api";
 
 const formatDate = (iso) =>
   new Date(iso).toLocaleDateString("da-DK", {
@@ -17,7 +9,7 @@ const formatDate = (iso) =>
   });
 
 const Comments = async () => {
-  const comments = await fetchComments();
+  const comments = await getComments();
 
   return (
     <section>

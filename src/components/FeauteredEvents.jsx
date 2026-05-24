@@ -4,6 +4,7 @@ import { useState, useEffect, useCallback } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import useEmblaCarousel from "embla-carousel-react";
+import { imageUrl } from "@/lib/api";
 
 const formatDate = (iso) =>
   new Date(iso).toLocaleDateString("en-GB", { day: "2-digit", month: "short" });
@@ -21,7 +22,7 @@ const EventCard = ({ event }) => {
       onMouseLeave={() => setHovered(false)}
     >
       <Image
-        src={`https://nightclub-api-dhqe.onrender.com${event.asset.url}`}
+        src={imageUrl(event.asset.url)}
         alt={event.asset.alt}
         fill
         style={{ objectFit: "cover" }}

@@ -8,10 +8,10 @@ import Gallery from "@/components/Gallery";
 import Webplayer from "@/components/Webplayer";
 import PersonSpotlight from "@/components/PersonSpotlight";
 import Newsletter from "@/components/Newsletter";
+import { getEvents } from "@/lib/api";
 
 export default async function Home() {
-  const res = await fetch("https://nightclub-api-dhqe.onrender.com/events", { next: { revalidate: 60 } });
-  const allEvents = await res.json();
+  const allEvents = await getEvents({ next: { revalidate: 60 } });
   const featuredEvents = allEvents.filter((e) => e.isFeatured);
 
   return (

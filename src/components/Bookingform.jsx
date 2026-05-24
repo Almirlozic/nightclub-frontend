@@ -2,8 +2,7 @@
 
 import { useState, useEffect } from "react";
 import BtnNormal from "./BtnNormal";
-
-const API = "https://nightclub-api-dhqe.onrender.com";
+import { getEvents, postReservation, deleteReservation } from "@/lib/api";
 
 const inputClass =
   "w-full bg-transparent border border-gray-700 text-white placeholder-gray-500 px-4 py-3 outline-none focus:border-white transition-colors text-sm";
@@ -30,8 +29,7 @@ export default function BookingForm({
   const [loading, setLoading] = useState(false);
 
   useEffect(() => {
-    fetch(`${API}/events`)
-      .then((r) => r.json())
+    getEvents()
       .then((data) => {
         setEvents(data);
         if (initialEventId) {
@@ -56,18 +54,14 @@ export default function BookingForm({
     setError("");
     setLoading(true);
     try {
-      const res = await fetch(`${API}/reservations`, {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          name: form.name,
-          email: form.email,
-          table: String(selectedTable),
-          guests: form.guests,
-          date: selectedEvent.date,
-          phone: form.phone,
-          eventId: selectedEvent.id,
-        }),
+      const res = await postReservation({
+        name: form.name,
+        email: form.email,
+        table: String(selectedTable),
+        guests: form.guests,
+        date: selectedEvent.date,
+        phone: form.phone,
+        eventId: selectedEvent.id,
       });
       if (!res.ok) throw new Error();
       const data = await res.json();
@@ -83,7 +77,7 @@ export default function BookingForm({
 
   const handleDelete = async () => {
     if (!booking) return;
-    await fetch(`${API}/reservations/${booking.id}`, { method: "DELETE" });
+    await deleteReservation(booking.id);
     setBooking(null);
     setSelectedEvent(null);
   };

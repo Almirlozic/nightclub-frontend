@@ -3,9 +3,7 @@
 import { useState, useEffect, useCallback } from "react";
 import useEmblaCarousel from "embla-carousel-react";
 import SocialIcons from "./SocialIcons";
-
-const API_URL = "https://nightclub-api-dhqe.onrender.com/testimonials";
-const BASE_URL = "https://nightclub-api-dhqe.onrender.com";
+import { getTestimonials, imageUrl } from "@/lib/api";
 
 const PersonSpotlight = () => {
   const [people, setPeople] = useState([]);
@@ -14,9 +12,7 @@ const PersonSpotlight = () => {
   const [scrollSnaps, setScrollSnaps] = useState([]);
 
   useEffect(() => {
-    fetch(API_URL)
-      .then((res) => res.json())
-      .then((data) => setPeople(data));
+    getTestimonials().then((data) => setPeople(data));
   }, []);
 
   const onSelect = useCallback(() => {
@@ -49,7 +45,7 @@ const PersonSpotlight = () => {
           {people.map((p) => (
             <div key={p.id} className="flex-[0_0_100%] min-w-0 flex flex-col items-center text-center">
               <img
-                src={BASE_URL + p.asset.url}
+                src={imageUrl(p.asset.url)}
                 alt={p.asset.alt}
                 width={p.asset.width}
                 height={p.asset.height}

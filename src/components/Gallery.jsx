@@ -1,9 +1,8 @@
 import GalleryClient from "./GalleryClient";
+import { getGallery } from "@/lib/api";
 
 const Gallery = async () => {
-  const res = await fetch("https://nightclub-api-dhqe.onrender.com/gallery", { cache: "no-store" });
-
-  const data = await res.json();
+  const data = await getGallery();
 
   return <GalleryClient images={data.data ?? data} />;
 };

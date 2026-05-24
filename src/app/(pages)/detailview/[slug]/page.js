@@ -7,6 +7,7 @@ import { TbCategoryFilled } from "react-icons/tb";
 import { IoMdPricetags } from "react-icons/io";
 import { TbRating18Plus } from "react-icons/tb";
 import Commments from "@/components/Comments";
+import { getEvent, imageUrl } from "@/lib/api";
 
 function InfoItem({ icon, label, value, sub }) {
   return (
@@ -23,12 +24,7 @@ function InfoItem({ icon, label, value, sub }) {
 
 export default async function DetailPage({ params }) {
   const { slug } = await params;
-
-  const response = await fetch(`https://nightclub-api-dhqe.onrender.com/events/${slug}`, {
-    cache: "no-store",
-  });
-
-  const event = await response.json();
+  const event = await getEvent(slug);
 
   const formattedDate = new Date(event.date).toLocaleDateString("da", {
     year: "numeric",
@@ -50,7 +46,7 @@ export default async function DetailPage({ params }) {
     <>
       <div className="relative w-full h-[50vh] sm:h-[60vh] md:h-[80vh] lg:h-screen">
         <Image
-          src={`https://nightclub-api-dhqe.onrender.com${event.heroAsset.url}`}
+          src={imageUrl(event.heroAsset.url)}
           alt={event.heroAsset.alt}
           fill
           className="object-cover object-center z-0"
