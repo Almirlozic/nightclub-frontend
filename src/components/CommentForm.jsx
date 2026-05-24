@@ -14,7 +14,12 @@ const CommentForm = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    await postContactMessage(form);
+    const res = await postContactMessage({ ...form, date: new Date().toISOString() });
+    const data = await res.json();
+
+    const mine = JSON.parse(localStorage.getItem("myComments") || "[]");
+    localStorage.setItem("myComments", JSON.stringify([...mine, data.id]));
+
     setForm({ name: "", email: "", content: "" });
     router.refresh();
   };

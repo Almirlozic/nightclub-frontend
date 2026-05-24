@@ -1,5 +1,6 @@
 import CommentForm from "./CommentForm";
-import { getComments } from "@/lib/api";
+import DeleteButton from "./DeleteButton";
+import { getComments, getContactMessages } from "@/lib/api";
 
 const formatDate = (iso) =>
   new Date(iso).toLocaleDateString("da-DK", {
@@ -9,7 +10,12 @@ const formatDate = (iso) =>
   });
 
 const Comments = async () => {
-  const comments = await getComments();
+  const [rawComments, rawMessages] = await Promise.all([getComments(), getContactMessages()]);
+
+  const comments = [
+    ...rawComments.map((c) => ({ ...c, _key: `comment-${c.id}`, deletable: false })),
+    ...rawMessages.map((m) => ({ ...m, _key: `message-${m.id}`, deletable: true })),
+  ].sort((a, b) => new Date(a.date) - new Date(b.date));
 
   return (
     <section>
@@ -17,7 +23,7 @@ const Comments = async () => {
       <div className="relative">
         <ul className="comments-scroll flex flex-col gap-6 list-none m-0 p-0 max-h-105 overflow-y-auto pr-4">
           {comments.map((comment) => (
-            <li key={comment.id} className="pb-6">
+            <li key={comment._key} className="pb-6">
               <div className="flex items-center gap-2 mb-2">
                 <span className="font-bold uppercase tracking-widest text-sm">{comment.name}</span>
                 <span className="text-sm font-medium text-(--color-brand)">posted</span>

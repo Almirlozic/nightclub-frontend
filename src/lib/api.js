@@ -32,6 +32,12 @@ export async function getComments() {
   return res.json();
 }
 
+export async function getContactMessages() {
+  const res = await fetch(`${BASE_URL}/contact_messages`, { cache: "no-store" });
+  if (!res.ok) throw new Error("Failed to fetch contact messages");
+  return res.json();
+}
+
 export async function getReservations(eventId) {
   const res = await fetch(`${BASE_URL}/reservations?eventId=${eventId}`);
   if (!res.ok) throw new Error("Failed to fetch reservations");
