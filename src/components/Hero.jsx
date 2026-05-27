@@ -4,7 +4,6 @@ import { motion } from "framer-motion";
 import Link from "next/link";
 import Image from "next/image";
 import BtnNormal from "./BtnNormal";
-import Header from "./Header";
 
 const BACKGROUNDS = [
   "/assets/bg/header_bg_1.jpg",
@@ -84,10 +83,6 @@ export default function Hero() {
         </motion.div>
       </div>
 
-      {/* Navigation — sticky to top of viewport when scrolled past */}
-      <div className="relative z-20 sticky top-0">
-        <Header />
-      </div>
     </section>
   );
 }
