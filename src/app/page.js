@@ -1,3 +1,4 @@
+import Header from "@/components/Header";
 import Hero from "@/components/Hero";
 import WelcomeInNightclub from "@/components/WelcomeInNightclub";
 import H2Normal from "@/components/H2Normal";
@@ -16,6 +17,7 @@ export default async function Home() {
   return (
     <div>
       <Hero />
+      <Header />
       <H2Normal title="Welcome in Nightclub" />
       <WelcomeInNightclub />
       <H2Normal title="Feautered events" />
