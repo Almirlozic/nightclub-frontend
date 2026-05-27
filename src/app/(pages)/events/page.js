@@ -10,7 +10,7 @@ export default async function Page() {
 
   return (
     <>
-      <div>
+      <div className="-mt-24">
         <H2Normal title="EVENTS" bgImage="/assets/bg/footerbg.jpg" />
       </div>
       <div className="p-6">
