@@ -21,6 +21,7 @@ export default function BookingForm({
   selectedEvent,
   setSelectedEvent,
   initialEventId,
+  onReservationComplete,
 }) {
   const [events, setEvents] = useState([]);
   const [form, setForm] = useState({ name: "", email: "", guests: "", phone: "", comment: "" });
@@ -68,6 +69,7 @@ export default function BookingForm({
       setBooking(data);
       setForm({ name: "", email: "", guests: "", phone: "", comment: "" });
       setSelectedTable(null);
+      onReservationComplete?.(selectedEvent.id);
     } catch {
       setError("Something went wrong. Please try again.");
     } finally {

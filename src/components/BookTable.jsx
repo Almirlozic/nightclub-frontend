@@ -10,13 +10,17 @@ export default function BookTable({ initialEventId }) {
   const [selectedEvent, setSelectedEvent] = useState(null);
   const [reservedTables, setReservedTables] = useState([]);
 
+  const refreshReservations = (eventId) => {
+    getReservations(eventId)
+      .then((data) => setReservedTables(data.map((r) => String(r.table))));
+  };
+
   useEffect(() => {
     if (!selectedEvent) {
       setReservedTables([]);
       return;
     }
-    getReservations(selectedEvent.id)
-      .then((data) => setReservedTables(data.map((r) => String(r.table))));
+    refreshReservations(selectedEvent.id);
   }, [selectedEvent]);
 
   return (
@@ -32,6 +36,7 @@ export default function BookTable({ initialEventId }) {
         selectedEvent={selectedEvent}
         setSelectedEvent={setSelectedEvent}
         initialEventId={initialEventId}
+        onReservationComplete={refreshReservations}
       />
     </div>
   );
