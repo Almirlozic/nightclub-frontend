@@ -30,7 +30,7 @@ const CommentForm = () => {
     <form ref={formRef} onSubmit={handleSubmit} className="mt-16">
       <h3 className="text-xl font-bold tracking-widest uppercase mb-6">Leave a Comment</h3>
 
-      <div className="flex gap-4 mb-4">
+      <div className="flex flex-col sm:flex-row gap-4 mb-4">
         <input
           type="text"
           name="name"

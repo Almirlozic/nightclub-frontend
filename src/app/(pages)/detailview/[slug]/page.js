@@ -44,14 +44,14 @@ export default async function DetailPage({ params }) {
 
   return (
     <>
-      <div className="relative w-full h-[50vh] sm:h-[60vh] md:h-[80vh] lg:h-screen">
+      <div className="relative w-full h-[50vh] sm:h-[60vh] md:h-[80vh] lg:h-screen -mt-24">
         <Image
           src={imageUrl(event.heroAsset.url)}
           alt={event.heroAsset.alt}
           fill
           className="object-cover object-center z-0"
         />
-        <div className="absolute flex flex-col justify-start items-start sm:p-8 sm:pt-24 md:p-12 md:pt-28">
+        <div className="absolute flex flex-col justify-start items-start p-4 pt-20 sm:p-8 sm:pt-24 md:p-12 md:pt-28">
           <h1 className="text-2xl sm:text-4xl md:text-6xl font-bold text-white max-w-xs sm:max-w-md md:max-w-lg">
             {event.title}
           </h1>
