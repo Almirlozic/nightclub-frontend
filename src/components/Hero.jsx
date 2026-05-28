@@ -25,10 +25,8 @@ export default function Hero() {
 
       <div className="absolute inset-0 bg-black/50" />
 
-      {/* Centered content */}
       <div className="relative z-10 flex-1 flex flex-col items-center justify-center gap-4 text-center px-4">
 
-        {/* Logo — fold in */}
         <motion.div
           initial={{ scaleY: 0, opacity: 0 }}
           animate={{ scaleY: 1, opacity: 1 }}
@@ -44,7 +42,6 @@ export default function Hero() {
           />
         </motion.div>
 
-        {/* Tagline — drops in after logo */}
         <motion.p
           className="text-white tracking-[0.4em] uppercase text-sm"
           initial={{ y: -24, opacity: 0 }}
@@ -54,7 +51,6 @@ export default function Hero() {
           HAVE A GOOD TIME
         </motion.p>
 
-        {/* Buttons — fade in last */}
         <motion.div
           className="flex gap-4 mt-4"
           initial={{ opacity: 0 }}

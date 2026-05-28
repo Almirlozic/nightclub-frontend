@@ -71,22 +71,18 @@ export default function Webplayer() {
 
   return (
     <div className="bg-black text-white py-10 px-6">
-     
 
       {/* Player */}
       <div className="flex gap-6 items-start max-w-4xl mx-auto">
-        {/* Thumbnail */}
         <img
           src={currentSong.thumbnail}
           alt={currentSong.title}
           className="w-48 h-48 object-cover shrink-0"
         />
 
-        {/* Controls */}
         <div className="flex flex-col justify-center gap-4 w-full">
           <p className="text-sm font-semibold tracking-widest uppercase">{currentSong.title}</p>
 
-          {/* Progress bar */}
           <div className="flex items-center gap-3">
             <span className="text-xs text-gray-400 w-20">{formatTime(currentTime)} / {formatTime(duration)}</span>
             <input
@@ -100,7 +96,6 @@ export default function Webplayer() {
             />
           </div>
 
-          {/* Buttons */}
           <div className="flex items-center gap-6 text-lg">
             <button onClick={playPrev} className="hover:text-red-500 transition-colors">
               <FaStepBackward />
