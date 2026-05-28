@@ -16,6 +16,7 @@ function formatTime(seconds) {
   return `${m}:${s.toString().padStart(2, "0")}`
 }
 
+// AI hjalp med at styre audio state: afspilning, seek, volume og progress via useRef og useState.
 export default function Webplayer() {
   const audioRef = useRef(null)
   const [isPlaying, setIsPlaying] = useState(false)

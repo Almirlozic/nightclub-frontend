@@ -11,6 +11,7 @@ export default function Newsletter() {
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
 
+  // Hjælp fra ai med at håndtere catch og korrekt hiraki i denne funktion, som håndterer abonnementslogikken. Den validerer emailen, sender en anmodning til API'en og viser en bekræftelsespopup ved succes eller en fejlmeddelelse ved fejl.
   const handleSubscribe = async () => {
     if (!email || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
       setError("Please enter a valid email address.");

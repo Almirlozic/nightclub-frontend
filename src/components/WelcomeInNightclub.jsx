@@ -38,7 +38,7 @@ const Card = ({ src, icon: Icon, label, description }) => {
       onMouseEnter={() => setHovered(true)}
       onMouseLeave={() => setHovered(false)}
     >
-      {/* Default: photo */}
+  
       <div
         className={`absolute inset-0 transition-opacity duration-300 ${
           hovered ? "opacity-0" : "opacity-100"
@@ -47,7 +47,7 @@ const Card = ({ src, icon: Icon, label, description }) => {
         <Image src={src} alt={label} fill style={{ objectFit: "cover" }} />
       </div>
 
-      {/* Hover: info card */}
+    
       <div
         className={`absolute inset-0 bg-(--color-bg) transition-opacity duration-300 flex flex-col items-center justify-center text-center px-6 gap-4 ${
           hovered ? "opacity-100" : "opacity-0"
@@ -94,6 +94,7 @@ const Card = ({ src, icon: Icon, label, description }) => {
 
 const WelcomeInNightclub = () => {
   return (
+    // ai hjalp med animation og styling for at lave en sektion med 3 kort, der viser forskellige aspekter af natklubben (night club, restaurant, bar). Hvert kort har et billede, en ikon, en label og en beskrivelse
     <>
       <style>{`
         @keyframes slide-from-left {
