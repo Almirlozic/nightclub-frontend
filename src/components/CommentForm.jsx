@@ -7,6 +7,8 @@ import { postContactMessage } from "@/lib/api";
 
 const inputClass = "flex-1 bg-transparent border border-white/30 px-4 py-3 text-sm placeholder:text-white/40 focus:outline-none focus:border-(--color-brand)";
 
+// AI hjalp med at bruge router.refresh() til at genindlæse server-data efter submit og
+// localStorage til at holde styr på hvilke kommentarer der tilhører brugeren
 const CommentForm = () => {
   const [form, setForm] = useState({ name: "", email: "", content: "" });
   const formRef = useRef(null);

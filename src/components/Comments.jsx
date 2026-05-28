@@ -9,6 +9,7 @@ const formatDate = (iso) =>
     year: "numeric",
   });
 
+// AI hjalp med at kombinere kommentarer og beskeder til ét samlet feed med Promise.all
 const Comments = async () => {
   const [rawComments, rawMessages] = await Promise.all([getComments(), getContactMessages()]);
 
