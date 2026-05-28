@@ -68,7 +68,7 @@ export default function TableMap({ selectedTable, onSelect, reservedTables }) {
   return (
     <div className="mb-10">
       <div className="grid grid-cols-5 gap-4 justify-items-center">
-        //Hjælp med at lave en grid med 15 borde, hvor hver bord er en TableUnit komponent, der viser om det er selected eller reserved. Reserved borde er disabled og har en "BOOKED" label over sig.
+        {/* //Hjælp med at lave en grid med 15 borde, hvor hver bord er en TableUnit komponent, der viser om det er selected eller reserved. Reserved borde er disabled og har en "BOOKED" label over sig. */}
         {Array.from({ length: TOTAL }, (_, i) => i + 1).map((n) => (
           <TableUnit
             key={n}
