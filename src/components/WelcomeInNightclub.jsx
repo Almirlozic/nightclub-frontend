@@ -53,7 +53,6 @@ const Card = ({ src, icon: Icon, label, description }) => {
           hovered ? "opacity-100" : "opacity-0"
         }`}
       >
-        {/* Corner accents */}
         <div
           key={hovered ? "tl-on" : "tl-off"}
           className={`absolute top-0 left-0 w-6 h-6 bg-(--color-brand)${hovered ? " nc-corner-tl" : ""}`}
@@ -65,7 +64,6 @@ const Card = ({ src, icon: Icon, label, description }) => {
           style={{ clipPath: "polygon(100% 100%, 0 100%, 100% 0)" }}
         />
 
-        {/* Icon */}
         <div
           key={hovered ? "icon-on" : "icon-off"}
           className={`border border-(--color-brand) p-4${hovered ? " nc-slide-left" : ""}`}

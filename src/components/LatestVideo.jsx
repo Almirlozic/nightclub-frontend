@@ -16,9 +16,7 @@ const LatestVideo = () => {
 
   return (
     <div className="flex flex-col items-center gap-6">
-      {/* Video with corner accents */}
       <div className="relative w-full max-w-4xl">
-        {/* Corner accents */}
         <div
           className="absolute top-0 left-0 w-10 h-10 bg-(--color-brand) z-10"
           style={{ clipPath: "polygon(0 0, 100% 0, 0 100%)" }}
@@ -39,7 +37,6 @@ const LatestVideo = () => {
         </video>
       </div>
 
-      {/* Arrow buttons */}
       <div className="flex gap-2">
         <button
           onClick={prev}
