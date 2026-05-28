@@ -97,7 +97,7 @@ const EventCard = ({ event }) => {
     </div>
   );
 };
-
+// hjælp fra ai og embla carousel til at lave en slider med 2 events pr. slide, og navigation dots under slideren. Mobil har swipe, desktop har klik på dots.
 const FeauteredEvents = ({ events = [] }) => {
   const [emblaRef, emblaApi] = useEmblaCarousel({ loop: false });
   const [selectedIndex, setSelectedIndex] = useState(0);

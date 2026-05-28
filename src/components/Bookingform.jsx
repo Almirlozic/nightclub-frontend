@@ -8,7 +8,7 @@ const inputClass =
   "w-full bg-transparent border border-gray-700 text-white placeholder-gray-500 px-4 py-3 outline-none focus:border-white transition-colors text-sm";
 
 const formatEventLabel = (event) =>
-  new Date(event.date).toLocaleDateString("en-GB", {
+  new Date(event.date).toLocaleDateString("DK", {
     weekday: "short",
     day: "2-digit",
     month: "short",
@@ -38,7 +38,7 @@ export default function BookingForm({
         }
       });
   }, []);
-
+// Hjælp fra ai med at skrive denne funktion, som opdaterer form state ved ændring i input felterne. Den tager et felt navn og returnerer en funktion, der opdaterer det tilsvarende felt i form state med den nye værdi fra input eventet.
   const set = (field) => (e) => setForm((f) => ({ ...f, [field]: e.target.value }));
 
   const handleEventChange = (e) => {
@@ -81,7 +81,7 @@ export default function BookingForm({
     setBooking(null);
     setSelectedEvent(null);
   };
-
+// brug af ai stopper her
   if (booking) {
     return (
       <div className="border border-gray-700 p-8 text-center">
