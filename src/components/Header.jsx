@@ -15,6 +15,7 @@ const links = [
   { label: "CONTACT US", href: "/contact" },
 ];
 
+// AI hjalp med at lave bogstav-for-bogstav flip-animationen med framer-motion
 const FlipLink = ({ children, href, isActive }) => {
   return (
     <Link href={href}>
@@ -69,6 +70,7 @@ const FlipLink = ({ children, href, isActive }) => {
   );
 };
 
+// AI hjalp med at implementere burger-menuen ved hjælp af den native Popover API
 const BurgerMenu = () => {
   const pathname = usePathname();
   const popoverRef = useRef(null);

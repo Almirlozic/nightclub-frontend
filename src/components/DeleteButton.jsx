@@ -6,6 +6,8 @@ import { deleteContactMessage } from "@/lib/api";
 
 const getMyComments = () => JSON.parse(localStorage.getItem("myComments") || "[]");
 
+// AI hjalp med at vise delete-knappen kun på kommentarer man selv har oprettet,
+// ved at tjekke localStorage mod kommentarens id
 const DeleteButton = ({ id }) => {
   const [isOwn, setIsOwn] = useState(false);
   const router = useRouter();
