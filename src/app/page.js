@@ -8,10 +8,13 @@ import Gallery from "@/components/Gallery";
 import Webplayer from "@/components/Webplayer";
 import PersonSpotlight from "@/components/PersonSpotlight";
 import Newsletter from "@/components/Newsletter";
-import { getEvents } from "@/lib/api";
+import { getEvents, getTestimonials } from "@/lib/api";
 
 export default async function Home() {
-  const allEvents = await getEvents({ next: { revalidate: 60 } });
+  const [allEvents, testimonials] = await Promise.all([
+    getEvents({ next: { revalidate: 60 } }),
+    getTestimonials(),
+  ]);
   const featuredEvents = allEvents.filter((e) => e.isFeatured);
 
   return (
@@ -28,7 +31,7 @@ export default async function Home() {
       <Webplayer />
       <H2Normal title="Latest Video" />
       <LatestVideo />
-      <PersonSpotlight />
+      <PersonSpotlight initialPeople={testimonials} />
       <Newsletter />
     </div>
   );

@@ -1,25 +1,18 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import TableMap from "./TableMap";
 import BookingForm from "./Bookingform";
-import { getReservations } from "@/lib/api";
 
-
-//ai hjalp med at importere child components og API funktion, og skrive den overordnede struktur for BookTable komponenten, som håndterer bordreservationer. Den bruger useState til at holde styr på det valgte bord, den valgte begivenhed og reserverede borde. useEffect bruges til at hente reservationer for den valgte begivenhed, når den ændres. Komponenten render en TableMap og en BookingForm, og passer de nødvendige props ned til dem. initialEventId prop bruges til at forudvælge en begivenhed i BookingForm.
-export default function BookTable({ initialEventId }) {
+export default function BookTable({ initialEventId, initialEvents = [], initialReservationsByEvent = {} }) {
   const [selectedTable, setSelectedTable] = useState(null);
-  const [selectedEvent, setSelectedEvent] = useState(null);
-  const [reservedTables, setReservedTables] = useState([]);
+  const initialSelectedEvent =
+    initialEvents.find((event) => String(event.id) === String(initialEventId)) ?? null;
+  const [selectedEvent, setSelectedEvent] = useState(initialSelectedEvent);
 
-  useEffect(() => {
-    if (!selectedEvent) {
-      setReservedTables([]);
-      return;
-    }
-    getReservations(selectedEvent.id)
-      .then((data) => setReservedTables(data.map((r) => String(r.table))));
-  }, [selectedEvent]);
+  const reservedTables = selectedEvent
+    ? (initialReservationsByEvent[String(selectedEvent.id)] ?? []).map((reservation) => String(reservation.table))
+    : [];
 
   return (
     <div className="max-w-4xl mx-auto px-4 py-12">
@@ -34,6 +27,7 @@ export default function BookTable({ initialEventId }) {
         selectedEvent={selectedEvent}
         setSelectedEvent={setSelectedEvent}
         initialEventId={initialEventId}
+        events={initialEvents}
       />
     </div>
   );
