@@ -1,8 +1,8 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import BtnNormal from "./BtnNormal";
-import { getEvents, postReservation, deleteReservation } from "@/lib/api";
+import { postReservation, deleteReservation } from "@/lib/api";
 
 const inputClass =
   "w-full bg-transparent border border-gray-700 text-white placeholder-gray-500 px-4 py-3 outline-none focus:border-white transition-colors text-sm";
@@ -21,24 +21,14 @@ export default function BookingForm({
   selectedEvent,
   setSelectedEvent,
   initialEventId,
+  events = [],
 }) {
-  const [events, setEvents] = useState([]);
   const [form, setForm] = useState({ name: "", email: "", guests: "", phone: "", comment: "" });
   const [booking, setBooking] = useState(null);
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
 
-  useEffect(() => {
-    getEvents()
-      .then((data) => {
-        setEvents(data);
-        if (initialEventId) {
-          const match = data.find((ev) => String(ev.id) === String(initialEventId));
-          if (match) setSelectedEvent(match);
-        }
-      });
-  }, []);
-// Hjælp fra ai med at skrive denne funktion, som opdaterer form state ved ændring i input felterne. Den tager et felt navn og returnerer en funktion, der opdaterer det tilsvarende felt i form state med den nye værdi fra input eventet.
+  // Hjælp fra ai med at skrive denne funktion, som opdaterer form state ved ændring i input felterne. Den tager et felt navn og returnerer en funktion, der opdaterer det tilsvarende felt i form state med den nye værdi fra input eventet.
   const set = (field) => (e) => setForm((f) => ({ ...f, [field]: e.target.value }));
 
   const handleEventChange = (e) => {
@@ -151,7 +141,7 @@ export default function BookingForm({
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
           <select
             className={`${inputClass} cursor-pointer`}
-            style={{ backgroundColor: "#000" }}
+            style={{ backgroundColor: "var(--color-bg)" }}
             value={selectedEvent ? String(selectedEvent.id) : ""}
             onChange={handleEventChange}
           >

@@ -32,6 +32,14 @@ export async function getComments() {
   return res.json();
 }
 
+export async function postComment(data) {
+  return fetch(`${BASE_URL}/comments`, {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify(data),
+  });
+}
+
 export async function getContactMessages() {
   const res = await fetch(`${BASE_URL}/contact_messages`, { cache: "no-store" });
   if (!res.ok) throw new Error("Failed to fetch contact messages");
@@ -40,6 +48,12 @@ export async function getContactMessages() {
 
 export async function getReservations(eventId) {
   const res = await fetch(`${BASE_URL}/reservations?eventId=${eventId}`);
+  if (!res.ok) throw new Error("Failed to fetch reservations");
+  return res.json();
+}
+
+export async function getAllReservations(options = {}) {
+  const res = await fetch(`${BASE_URL}/reservations`, { cache: "no-store", ...options });
   if (!res.ok) throw new Error("Failed to fetch reservations");
   return res.json();
 }

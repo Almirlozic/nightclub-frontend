@@ -27,7 +27,7 @@ const formatDate = (iso) =>
 
 // Comments er en async server-komponent — den henter data fra serveren FØR siden vises.
 // async tillader os at bruge await inde i funktionen.
-const Comments = async () => {
+const Comments = async ({ eventId }) => {
 
   // Promise.all([...]) henter BEGGE datasæt SAMTIDIGT (parallelt) — hurtigere end én ad gangen.
   // await venter på at begge er færdige inden vi fortsætter.
@@ -116,7 +116,7 @@ const Comments = async () => {
       </div>
 
       {/* Gengiver kommentarformularen nedenunder listen */}
-      <CommentForm />
+      <CommentForm eventId={eventId} />
 
     </section>
   );

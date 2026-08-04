@@ -12,8 +12,8 @@ import { TbCategoryFilled } from "react-icons/tb";   // Kategoriikon
 import { IoMdPricetags } from "react-icons/io";      // Prisikon
 import { TbRating18Plus } from "react-icons/tb";     // 18+-aldersgrænse-ikon
 
-// Henter Comments-komponenten (stavefejlen "Commments" med tre m'er er i den originale kode).
-import Commments from "@/components/Comments";
+// Henter Comments-komponenten.
+import Comments from "@/components/Comments";
 
 // Henter to funktioner fra vores API-bibliotek:
 //   getEvent  — henter data for ét specifikt event ud fra dets slug
@@ -235,7 +235,7 @@ export default async function DetailPage({ params }) {
         {/* KOMMENTARSEKTION — strækker sig også over begge kolonner */}
         <div className="col-span-full">
           {/* Gengiver Comments-komponenten der viser kommentarliste og -formular */}
-          <Commments />
+          <Comments eventId={event.id} />
         </div>
 
       </div>

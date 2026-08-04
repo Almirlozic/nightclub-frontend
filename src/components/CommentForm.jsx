@@ -13,9 +13,9 @@ import { useRouter } from "next/navigation";
 // Henter vores custom knap-komponent BtnNormal.
 import BtnNormal from "./BtnNormal";
 
-// Henter postContactMessage fra vores API-bibliotek.
-// Denne funktion sender formulardata til backend og gemmer det som en ny besked.
-import { postContactMessage } from "@/lib/api";
+// Henter postComment fra vores API-bibliotek.
+// Denne funktion sender formulardata til backend og gemmer det som en ny kommentar.
+import { postComment } from "@/lib/api";
 
 // inputClass er en variabel der gemmer en lang CSS-klasse-streng.
 // Vi bruger den på begge inputfelter for at undgå at gentage den lange streng to gange.
@@ -32,7 +32,7 @@ const inputClass = "flex-1 bg-transparent border border-white/30 px-4 py-3 text-
 // localStorage til at holde styr på hvilke kommentarer der tilhører brugeren.
 
 // CommentForm er komponenten med hele formularen — navn, email, kommentar og send-knap.
-const CommentForm = () => {
+const CommentForm = ({ eventId }) => {
 
   // form er et objekt der indeholder de tre formularfelters værdier.
   // useState starter dem alle som tomme strenge "".
@@ -67,11 +67,12 @@ const CommentForm = () => {
     // som ellers ville genindlæse hele siden ved submit.
     e.preventDefault();
 
-    // Sender formulardataen til backend via postContactMessage.
+    // Sender formulardataen til backend via postComment.
     // ...form spreder alle tre felter (name, email, content) ind i objektet.
     // date: new Date().toISOString() tilføjer den aktuelle dato i ISO-format.
+    // eventId knytter kommentaren til det aktuelle event.
     // await venter på at API-kaldet er færdigt og gemmer svaret i res.
-    const res = await postContactMessage({ ...form, date: new Date().toISOString() });
+    const res = await postComment({ ...form, date: new Date().toISOString(), eventId });
 
     // res er et HTTP-response-objekt. .json() læser kroppen og konverterer den
     // fra JSON-tekst til et JavaScript-objekt. await venter på det.

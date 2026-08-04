@@ -64,7 +64,7 @@ export default function Hero() {
             whileHover={{ backgroundPosition: "100% 50%" }}
             transition={{ duration: 0.6, ease: "easeInOut" }}
             style={{
-              background: "linear-gradient(to right, #e91e8c, #9b27af, #e91e8c)",
+              background: "linear-gradient(to right, var(--color-brand), oklch(45% 0.22 300), var(--color-brand))",
               backgroundSize: "200% 100%",
               backgroundPosition: "0% 50%",
             }}

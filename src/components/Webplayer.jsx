@@ -93,7 +93,7 @@ export default function Webplayer() {
               value={progress}
               onChange={handleSeek}
               className="flex-1 h-1 cursor-pointer appearance-none"
-              style={{ background: `linear-gradient(to right, #dc2626 ${progress}%, #4b5563 ${progress}%)` }}
+              style={{ background: `linear-gradient(to right, var(--color-brand) ${progress}%, oklch(26% 0.01 0) ${progress}%)` }}
             />
           </div>
 
@@ -123,7 +123,7 @@ export default function Webplayer() {
                 value={volume}
                 onChange={handleVolume}
                 className="w-20 h-1 cursor-pointer appearance-none"
-                style={{ background: `linear-gradient(to right, #dc2626 ${volume * 100}%, #4b5563 ${volume * 100}%)` }}
+                style={{ background: `linear-gradient(to right, var(--color-brand) ${volume * 100}%, oklch(26% 0.01 0) ${volume * 100}%)` }}
               />
             </div>
           </div>

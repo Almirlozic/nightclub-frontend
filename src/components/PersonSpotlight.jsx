@@ -3,17 +3,12 @@
 import { useState, useEffect, useCallback } from "react";
 import useEmblaCarousel from "embla-carousel-react";
 import SocialIcons from "./SocialIcons";
-import { getTestimonials, imageUrl } from "@/lib/api";
+import { imageUrl } from "@/lib/api";
 
-const PersonSpotlight = () => {
-  const [people, setPeople] = useState([]);
+const PersonSpotlight = ({ initialPeople = [] }) => {
   const [emblaRef, emblaApi] = useEmblaCarousel({ loop: false });
   const [selectedIndex, setSelectedIndex] = useState(0);
   const [scrollSnaps, setScrollSnaps] = useState([]);
-
-  useEffect(() => {
-    getTestimonials().then((data) => setPeople(data));
-  }, []);
 
   const onSelect = useCallback(() => {
     if (!emblaApi) return;
@@ -27,7 +22,7 @@ const PersonSpotlight = () => {
     onSelect();
   }, [emblaApi, onSelect]);
 
-  if (!people.length) return null;
+  if (!initialPeople.length) return null;
 
   return (
     <div
@@ -42,7 +37,7 @@ const PersonSpotlight = () => {
       <div className="absolute inset-0 bg-black/85" />
       <div className="relative w-full max-w-2xl overflow-hidden" ref={emblaRef}>
         <div className="flex">
-          {people.map((p) => (
+          {initialPeople.map((p) => (
             <div key={p.id} className="flex-[0_0_100%] min-w-0 flex flex-col items-center text-center">
               <img
                 src={imageUrl(p.asset.url)}
