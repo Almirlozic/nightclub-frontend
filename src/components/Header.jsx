@@ -167,7 +167,12 @@ const Header = () => {
       <nav className="hidden md:block">
         <ul className="relative flex gap-10 font-bold text-xl pb-2">
           {links.map((link, i) => (
-            <li key={link.href} data-index={i} onMouseEnter={moveUnderline} onMouseLeave={resetUnderline}>
+            <li
+              key={link.href}
+              data-index={i}
+              onMouseEnter={moveUnderline}
+              onMouseLeave={resetUnderline}
+            >
               <FlipLink href={link.href} isActive={i === activeIndex}>
                 {link.label}
               </FlipLink>
