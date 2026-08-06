@@ -10,6 +10,7 @@ export async function getEvents(options = {}) {
 
 export async function getEvent(slug) {
   const res = await fetch(`${BASE_URL}/events/${slug}`, { cache: "no-store" });
+  if (res.status === 404) return null;
   if (!res.ok) throw new Error("Failed to fetch event");
   return res.json();
 }
@@ -26,8 +27,8 @@ export async function getGallery() {
   return res.json();
 }
 
-export async function getComments() {
-  const res = await fetch(`${BASE_URL}/comments`, { cache: "no-store" });
+export async function getComments(eventId) {
+  const res = await fetch(`${BASE_URL}/comments?eventId=${eventId}`, { cache: "no-store" });
   if (!res.ok) throw new Error("Failed to fetch comments");
   return res.json();
 }
@@ -40,10 +41,8 @@ export async function postComment(data) {
   });
 }
 
-export async function getContactMessages() {
-  const res = await fetch(`${BASE_URL}/contact_messages`, { cache: "no-store" });
-  if (!res.ok) throw new Error("Failed to fetch contact messages");
-  return res.json();
+export async function deleteComment(id) {
+  return fetch(`${BASE_URL}/comments/${id}`, { method: "DELETE" });
 }
 
 export async function getReservations(eventId) {
@@ -84,8 +83,4 @@ export async function postReservation(data) {
 
 export async function deleteReservation(id) {
   return fetch(`${BASE_URL}/reservations/${id}`, { method: "DELETE" });
-}
-
-export async function deleteContactMessage(id) {
-  return fetch(`${BASE_URL}/contact_messages/${id}`, { method: "DELETE" });
 }

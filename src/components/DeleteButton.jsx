@@ -4,7 +4,7 @@ import { useEffect, useState } from "react";
 
 import { useRouter } from "next/navigation";
 
-import { deleteContactMessage } from "@/lib/api";
+import { deleteComment } from "@/lib/api";
 
 const getMyComments = () => JSON.parse(localStorage.getItem("myComments") || "[]");
 
@@ -25,7 +25,7 @@ const DeleteButton = ({ id }) => {
 
   const handleDelete = async () => {
 
-    await deleteContactMessage(id);
+    await deleteComment(id);
 
     localStorage.setItem("myComments", JSON.stringify(getMyComments().filter((i) => i !== id)));
 

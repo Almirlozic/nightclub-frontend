@@ -1,4 +1,5 @@
 import Image from "next/image";
+import { notFound } from "next/navigation";
 
 import { MdDateRange } from "react-icons/md";
 import { FaDoorOpen } from "react-icons/fa";
@@ -35,6 +36,8 @@ export default async function DetailPage({ params }) {
   const { slug } = await params;
 
   const event = await getEvent(slug);
+
+  if (!event) notFound();
 
   const formattedDate = new Date(event.date).toLocaleDateString("da", {
     year: "numeric",
