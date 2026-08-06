@@ -2,7 +2,7 @@ import CommentForm from "./CommentForm";
 
 import DeleteButton from "./DeleteButton";
 
-import { getComments, getContactMessages } from "@/lib/api";
+import { getComments } from "@/lib/api";
 
 const formatDate = (iso) =>
   new Date(iso).toLocaleDateString("da-DK", {
@@ -11,18 +11,11 @@ const formatDate = (iso) =>
     year: "numeric",
   });
 
-// AI hjalp med at kombinere kommentarer og beskeder til ét samlet feed med Promise.all
-
 const Comments = async ({ eventId }) => {
 
-  const [rawComments, rawMessages] = await Promise.all([getComments(), getContactMessages()]);
+  const rawComments = await getComments(eventId);
 
-  const comments = [
-    ...rawComments.map((c) => ({ ...c, _key: `comment-${c.id}`, deletable: false })),
-
-    ...rawMessages.map((m) => ({ ...m, _key: `message-${m.id}`, deletable: true })),
-
-  ].sort((a, b) => new Date(a.date) - new Date(b.date));
+  const comments = [...rawComments].sort((a, b) => new Date(a.date) - new Date(b.date));
 
   return (
     <section>
@@ -35,7 +28,7 @@ const Comments = async ({ eventId }) => {
 
           {comments.map((comment) => (
 
-            <li key={comment._key} className="pb-6">
+            <li key={comment.id} className="pb-6">
 
               <div className="flex items-center gap-2 mb-2">
 
@@ -47,7 +40,7 @@ const Comments = async ({ eventId }) => {
                   {formatDate(comment.date)}
                 </time>
 
-                {comment.deletable && <div className="ml-auto"><DeleteButton id={comment.id} /></div>}
+                <div className="ml-auto"><DeleteButton id={comment.id} /></div>
 
               </div>
 
